@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sandbox-wordmark",
+  "type": "registry:ui",
+  "title": "Sandbox Wordmark",
+  "description": "A chunky, glossy beach-toy wordmark: rounded Nunito, primary toy colors per letter, a gentle alternating tilt, and a drop shadow.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/sandbox-wordmark.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/sandbox-wordmark.tsx",
+      "content": "import { Nunito } from \"next/font/google\";\nimport { cn } from \"@/lib/utils\";\n\n// Rounded, friendly Nunito — pulled via next/font so the mark is self-contained.\nconst nunito = Nunito({ subsets: [\"latin\"], weight: [\"800\"] });\n\n// A primary toy palette: bucket red, sand amber, shovel blue.\nconst TOY_COLORS = [\"#EF4444\", \"#F59E0B\", \"#3B82F6\"];\n\n/**\n * SandboxWordmark — a chunky, glossy beach-toy wordmark: soft rounded Nunito,\n * primary toy colors cycling per letter, a gentle alternating tilt, and a drop\n * shadow so the letters read as plastic toys. Font-size comes from `className`.\n */\nexport function SandboxWordmark({\n  text = \"Sandbox\",\n  colors = TOY_COLORS,\n  className,\n}: {\n  text?: string;\n  colors?: string[];\n  className?: string;\n}) {\n  return (\n    <span\n      className={cn(nunito.className, \"inline-flex select-none items-end font-extrabold leading-none\", className)}\n      aria-label={text}\n    >\n      {text.split(\"\").map((ch, i) =>\n        ch === \" \" ? (\n          <span key={i} className=\"inline-block w-2\" />\n        ) : (\n          <span\n            key={i}\n            className=\"inline-block\"\n            style={{\n              color: colors[i % colors.length],\n              transform: `rotate(${i % 2 === 0 ? -4 : 4}deg)`,\n              textShadow: \"0 2px 0 rgba(0,0,0,0.18)\",\n            }}\n          >\n            {ch}\n          </span>\n        ),\n      )}\n    </span>\n  );\n}\n\nexport default SandboxWordmark;\n"
+    }
+  ]
+}

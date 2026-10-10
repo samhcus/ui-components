@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "snap-back-card",
+  "type": "registry:ui",
+  "title": "Snap-back Card",
+  "description": "Wrap anything to drag it anywhere on the page, then spring it right back to where it started.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/snap-back-card.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/snap-back-card.tsx",
+      "content": "\"use client\";\n\nimport { useState } from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * SnapBackCard — wrap anything to make it draggable anywhere on the page, then\n * spring back to exactly where it started when you let go. Uses Motion's\n * `dragSnapToOrigin`, lifts and slightly scales the content while held, and\n * rides a spring home on release. Set `disabled` to lock it in place. Drag is\n * disabled under prefers-reduced-motion (the element stays put).\n */\nexport function SnapBackCard({\n  children,\n  disabled = false,\n  className,\n  onDragStart,\n  onDragEnd,\n}: {\n  children: React.ReactNode;\n  /** Lock the card in place (no dragging). */\n  disabled?: boolean;\n  className?: string;\n  onDragStart?: () => void;\n  onDragEnd?: () => void;\n}) {\n  const reduce = useReducedMotion();\n  const [dragging, setDragging] = useState(false);\n  const canDrag = !disabled && !reduce;\n\n  return (\n    <motion.div\n      drag={canDrag}\n      dragSnapToOrigin\n      dragMomentum={false}\n      dragElastic={0.16}\n      onDragStart={() => {\n        setDragging(true);\n        onDragStart?.();\n      }}\n      onDragEnd={() => {\n        setDragging(false);\n        onDragEnd?.();\n      }}\n      animate={{\n        scale: dragging ? 1.04 : 1,\n        boxShadow: dragging\n          ? \"0 30px 60px -18px rgba(0,0,0,0.35)\"\n          : \"0 0px 0px 0px rgba(0,0,0,0)\",\n      }}\n      transition={{ type: \"spring\", stiffness: 480, damping: 34 }}\n      className={cn(\n        canDrag && \"cursor-grab active:cursor-grabbing\",\n        dragging && \"relative z-50\",\n        className,\n      )}\n      style={{ touchAction: canDrag ? \"none\" : undefined }}\n    >\n      {children}\n    </motion.div>\n  );\n}\n"
+    }
+  ]
+}

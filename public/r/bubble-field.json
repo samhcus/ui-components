@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "bubble-field",
+  "type": "registry:ui",
+  "title": "Bubble Field",
+  "description": "A lightweight layer of bubbles that rise and wobble up through any container, then loop.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/bubble-field.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/bubble-field.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useMemo, useState } from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * BubbleField — a lightweight layer of bubbles that rise and wobble up through\n * a container, then loop. Drop it into any `relative` box as an ambient effect\n * (under water, behind a hero, inside a card). Each bubble gets its own size,\n * lane, drift and pace so the field never looks like a grid. Renders nothing\n * for prefers-reduced-motion.\n */\nexport function BubbleField({\n  color = \"#ffffff\",\n  count = 14,\n  speed = 1,\n  rise = 260,\n  className,\n}: {\n  /** Bubble colour (used for the ring + a faint fill). */\n  color?: string;\n  /** How many bubbles are in the field. */\n  count?: number;\n  /** Speed multiplier — higher rises faster. */\n  speed?: number;\n  /** Travel distance in px (roughly the container height). */\n  rise?: number;\n  className?: string;\n}) {\n  const reduce = useReducedMotion();\n\n  // The field is seeded with Math.random, so it must not render during SSR or\n  // on the first client paint — that would mismatch hydration. Mount first,\n  // then let the bubbles in.\n  const [mounted, setMounted] = useState(false);\n  useEffect(() => setMounted(true), []);\n\n  const bubbles = useMemo(\n    () =>\n      Array.from({ length: count }, () => ({\n        left: Math.random() * 100,\n        size: 4 + Math.random() * 13,\n        delay: Math.random() * 7,\n        dur: (6 + Math.random() * 6) / speed,\n        drift: (Math.random() - 0.5) * 36,\n        opacity: 0.2 + Math.random() * 0.45,\n      })),\n    [count, speed],\n  );\n\n  if (reduce || !mounted) return null;\n\n  return (\n    <div aria-hidden className={cn(\"pointer-events-none absolute inset-0 overflow-hidden\", className)}>\n      {bubbles.map((b, i) => (\n        <motion.span\n          key={i}\n          className=\"absolute rounded-full\"\n          style={{\n            left: `${b.left}%`,\n            bottom: -b.size,\n            width: b.size,\n            height: b.size,\n            border: `1px solid ${color}`,\n            background: `${color}22`,\n            opacity: b.opacity,\n          }}\n          animate={{ y: [0, -rise], x: [0, b.drift, -b.drift * 0.6, 0] }}\n          transition={{\n            duration: b.dur,\n            delay: b.delay,\n            repeat: Infinity,\n            ease: \"easeInOut\",\n          }}\n        />\n      ))}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

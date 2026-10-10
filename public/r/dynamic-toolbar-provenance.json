@@ -1,0 +1,6 @@
+{
+  "source": "components/toolbar.tsx",
+  "sha256": "42bf565bdded3009443829f324052611a9160aa6b8d74d1c22e0ef32bcc76442",
+  "example": "/examples/dynamic-toolbar",
+  "archive": "/r/dynamic-toolbar-example.zip"
+}

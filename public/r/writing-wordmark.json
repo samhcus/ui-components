@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "writing-wordmark",
+  "type": "registry:ui",
+  "title": "Writing Wordmark",
+  "description": "A word in a warm handwriting signature, the informal counterpart to a serif masthead. Pulls the script face via next/font.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/writing-wordmark.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/writing-wordmark.tsx",
+      "content": "import { Caveat } from \"next/font/google\";\nimport { cn } from \"@/lib/utils\";\n\n// A handwriting signature face — pairs with an editorial masthead as the\n// informal, personal counterpart.\nconst signature = Caveat({ subsets: [\"latin\"], weight: \"700\" });\n\n/**\n * \"Writing\" wordmark — a word set in a handwriting signature. No underline.\n * Inherits color from the parent; `className` sets the font-size. Swap the label\n * via `children`.\n */\nexport function WritingWordmark({\n  children = \"Writing\",\n  className,\n}: {\n  children?: React.ReactNode;\n  className?: string;\n}) {\n  return (\n    <span\n      className={cn(\n        signature.className,\n        \"[font-size-adjust:none] select-none leading-none text-foreground\",\n        className\n      )}\n      aria-label={typeof children === \"string\" ? children : \"Writing\"}\n    >\n      {children}\n    </span>\n  );\n}\n\nexport default WritingWordmark;\n"
+    }
+  ]
+}

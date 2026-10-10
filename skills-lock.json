@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "skills": {
+    "animation-vocabulary": {
+      "source": "emilkowalski/skill",
+      "sourceType": "github",
+      "skillPath": "skills/animation-vocabulary/SKILL.md",
+      "computedHash": "39319fc9a33c15be08666b3685f58666f042ff36bb902b7814c0834a5ba99df4"
+    },
+    "apple-design": {
+      "source": "emilkowalski/skill",
+      "sourceType": "github",
+      "skillPath": "skills/apple-design/SKILL.md",
+      "computedHash": "8b94db67cb9edaad5f1501010804caa610131f1d2dfda0a27664b2e858deade3"
+    },
+    "emil-design-eng": {
+      "source": "emilkowalski/skill",
+      "sourceType": "github",
+      "skillPath": "skills/emil-design-eng/SKILL.md",
+      "computedHash": "8bdf9e4e6de7a4969147bf4828a4ad2c5aacd9fba4b690b250a85e0467ca387d"
+    },
+    "improve-animations": {
+      "source": "emilkowalski/skill",
+      "sourceType": "github",
+      "skillPath": "skills/improve-animations/SKILL.md",
+      "computedHash": "32f23d860467841f5b07cef198fb53efc70f2adaaa6144cf1a3434d782aed246"
+    },
+    "morphing-icons": {
+      "source": "raphaelsalaja/skill",
+      "sourceType": "github",
+      "skillPath": "skills/morphing-icons/SKILL.md",
+      "computedHash": "9a0d225abf57837c7d1b7c6ec4e607dbaf0584d316e8b127aa6176f537568d85"
+    },
+    "review-animations": {
+      "source": "emilkowalski/skill",
+      "sourceType": "github",
+      "skillPath": "skills/review-animations/SKILL.md",
+      "computedHash": "c92905bff59c3007d07c2638a2a83d5d71c901feef108cce1da0bf3c7cafd579"
+    },
+    "shadcn": {
+      "source": "shadcn-ui/ui",
+      "sourceType": "github",
+      "skillPath": "skills/shadcn/SKILL.md",
+      "computedHash": "ac9d0d69caac7de1d1e5647f3db3bcd2f13af355d6b3a78780fbf7fc80e8dca0"
+    },
+    "sounds-on-the-web": {
+      "source": "raphaelsalaja/skill",
+      "sourceType": "github",
+      "skillPath": "skills/sounds-on-the-web/SKILL.md",
+      "computedHash": "caf809d1a9e33e01b4a0be68c9a6f1b789f5742d84d120abc09842e9ba859116"
+    },
+    "transitions-dev": {
+      "source": "Jakubantalik/transitions-dev",
+      "sourceType": "github",
+      "skillPath": "skills/transitions-dev/SKILL.md",
+      "computedHash": "68aa43bb832ef2e85128e506cf78ebe6a19a38b3e01046d163202bbdd61b5ef0"
+    }
+  }
+}

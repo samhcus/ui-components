@@ -1,0 +1,408 @@
+{
+  "name": "samuel",
+  "homepage": "https://ui.samhc.us",
+  "items": [
+    {
+      "name": "pill-toggle",
+      "type": "registry:ui",
+      "title": "Pill Toggle",
+      "description": "A two-position rocker for light and dark mode. The active half sinks in with an inset shadow."
+    },
+    {
+      "name": "typewriter",
+      "type": "registry:ui",
+      "title": "Typewriter",
+      "description": "Types and deletes strings in sequence, looping through an array. Configurable speed and cursor."
+    },
+    {
+      "name": "pulsating-button",
+      "type": "registry:ui",
+      "title": "Pulsating Button",
+      "description": "A button that emits an expanding ring. Pulse or ripple, any color. Ships its own keyframes."
+    },
+    {
+      "name": "magnetic-button",
+      "type": "registry:ui",
+      "title": "Magnetic Button",
+      "description": "The wrapped element is pulled toward the cursor and springs back on leave. Respects reduced motion."
+    },
+    {
+      "name": "ship-toggle",
+      "type": "registry:ui",
+      "title": "Ship Toggle",
+      "description": "A tactile two-state switch (draft to shipped). The knob slides between halves with a spring."
+    },
+    {
+      "name": "css-box",
+      "type": "registry:ui",
+      "title": "CSS Box",
+      "description": "A draggable 3D cube in pure CSS perspective. Accepts any React node on each face."
+    },
+    {
+      "name": "dither-image",
+      "type": "registry:ui",
+      "title": "Dither Image",
+      "description": "Renders any image as a two-tone, Bayer-dithered stipple on a canvas. Ink on paper by default."
+    },
+    {
+      "name": "rage-button",
+      "type": "registry:ui",
+      "title": "Rage Button",
+      "description": "A button that snaps down on press and spits a burst of particles. Ship angry."
+    },
+    {
+      "name": "social-buttons",
+      "type": "registry:ui",
+      "title": "Social Buttons",
+      "description": "A row of social links — monochrome at rest, each blooms into its real brand hue on hover (Instagram gets its authentic gradient). Inline brand glyphs, zero dependencies."
+    },
+    {
+      "name": "memoji-widget",
+      "type": "registry:ui",
+      "title": "Memoji Widget",
+      "description": "A floating, draggable avatar that opens an introduction panel: a spinning 3D globe, reveal rows, profile cards, an intro video, and an email composer. Generic copy, pass your own name, avatar, and links. Pulls in the globe and tooltip from this registry."
+    },
+    {
+      "name": "wordmark-panel",
+      "type": "registry:ui",
+      "title": "Wordmark Panel",
+      "description": "A project-style panel titled with a colorful pixel wordmark. Drop any graphic in as the face. Pulls the pixel font via next/font."
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented Control",
+      "description": "An iOS pill thumb that spring-slides under the live segment, dividers dissolving as it passes."
+    },
+    {
+      "name": "animated-counter",
+      "type": "registry:ui",
+      "title": "Animated Counter",
+      "description": "An odometer with real spring physics. Each digit rolls the short way and rests on crisp integers."
+    },
+    {
+      "name": "spotlight-card",
+      "type": "registry:ui",
+      "title": "Spotlight Card",
+      "description": "A card that catches the light: the border trails your cursor with real weight."
+    },
+    {
+      "name": "shimmer-button",
+      "type": "registry:ui",
+      "title": "Shimmer Button",
+      "description": "A single light comet glides around the border while the face catches a glint on hover."
+    },
+    {
+      "name": "tilt-card",
+      "type": "registry:ui",
+      "title": "Tilt Card",
+      "description": "Leans toward your cursor in real 3D, catches a soft glare, and springs back flat when you leave."
+    },
+    {
+      "name": "confetti-button",
+      "type": "registry:ui",
+      "title": "Confetti Button",
+      "description": "Click it anywhere and a physics confetti spray erupts from the exact pixel you hit. No library."
+    },
+    {
+      "name": "hue-slider",
+      "type": "registry:ui",
+      "title": "Hue Slider",
+      "description": "A range input whose track is the colour wheel, with a live swatch that glows in the picked hue."
+    },
+    {
+      "name": "snap-back-card",
+      "type": "registry:ui",
+      "title": "Snap-back Card",
+      "description": "Wrap anything to drag it anywhere on the page, then spring it right back to where it started."
+    },
+    {
+      "name": "wave-fill",
+      "type": "registry:ui",
+      "title": "Wave Fill",
+      "description": "Animated waving water that fills any container from the bottom, with two parallax crests."
+    },
+    {
+      "name": "bubble-field",
+      "type": "registry:ui",
+      "title": "Bubble Field",
+      "description": "A lightweight layer of bubbles that rise and wobble up through any container, then loop."
+    },
+    {
+      "name": "aurora",
+      "type": "registry:ui",
+      "title": "Aurora",
+      "description": "Soft, slow-drifting ribbons of colour that glow behind content like the northern lights."
+    },
+    {
+      "name": "weather-stack",
+      "type": "registry:ui",
+      "title": "Weather Stack",
+      "description": "A frosted-glass weather + local-time widget. Seattle is fixed; add any city with live geocoded search or your own location, each ticking on its own timezone."
+    },
+    {
+      "name": "weather-scene",
+      "type": "registry:ui",
+      "title": "Weather Scene",
+      "description": "A looping gif or image with the frosted-glass weather widget floating over it, as one joint component."
+    },
+    {
+      "name": "purchase-button",
+      "type": "registry:ui",
+      "title": "Purchase Button",
+      "description": "A confident green call to action with a cart glyph and a springy press. Renders an anchor when a href is set, a button otherwise."
+    },
+    {
+      "name": "coffee-button",
+      "type": "registry:ui",
+      "title": "Coffee Button",
+      "description": "A frosted-glass support button built to sit over imagery: white text on a translucent, blurred surface with a gentle press."
+    },
+    {
+      "name": "read-more-button",
+      "type": "registry:ui",
+      "title": "Read More Button",
+      "description": "A small pill link whose trailing book icon is closed at rest and opens with a gentle upward lift on hover."
+    },
+    {
+      "name": "book-cover",
+      "type": "registry:ui",
+      "title": "Book Cover",
+      "description": "A cover image that lifts and pops on hover, then morphs open into a detail dialog with title, author, blurb, and a purchase link. Self-contained morph, no dialog dependency."
+    },
+    {
+      "name": "spinning-globe",
+      "type": "registry:ui",
+      "title": "Spinning Globe",
+      "description": "A clean line globe whose meridians scroll inside a circular clip, so it reads as rotating on its axis. Spins on hover or on a prop; stills under reduced motion."
+    },
+    {
+      "name": "samuel-wordmark",
+      "type": "registry:ui",
+      "title": "Samuel Wordmark",
+      "description": "A name set in a single editorial serif italic, built to run large and centered as a masthead. Pulls the serif via next/font."
+    },
+    {
+      "name": "writing-wordmark",
+      "type": "registry:ui",
+      "title": "Writing Wordmark",
+      "description": "A word in a warm handwriting signature, the informal counterpart to a serif masthead. Pulls the script face via next/font."
+    },
+    {
+      "name": "chopsticks-wordmark",
+      "type": "registry:ui",
+      "title": "Chopsticks Wordmark",
+      "description": "A rounded, friendly bot lockup: a light-blue Nunito name with a small badge alongside. Self-contained via next/font."
+    },
+    {
+      "name": "sandbox-wordmark",
+      "type": "registry:ui",
+      "title": "Sandbox Wordmark",
+      "description": "A chunky, glossy beach-toy wordmark: rounded Nunito, primary toy colors per letter, a gentle alternating tilt, and a drop shadow."
+    },
+    {
+      "name": "components-wordmark",
+      "type": "registry:ui",
+      "title": "Components Wordmark",
+      "description": "A clean product lockup: a small tracked eyebrow over a two-part name with an accent token. Relabel via props."
+    },
+    {
+      "name": "just-for-fun-wordmark",
+      "type": "registry:ui",
+      "title": "Just For Fun Wordmark",
+      "description": "A friendly rounded lockup with an italic last word underlined by a hand-drawn squiggle that scales with the type. Self-contained via next/font."
+    },
+    {
+      "name": "pixel-wordmark",
+      "type": "registry:ui",
+      "title": "Pixel Wordmark",
+      "description": "A blocky arcade pixel wordmark where each letter is tinted from a cycling palette. Pulls the pixel font via next/font."
+    },
+    {
+      "name": "flags",
+      "type": "registry:ui",
+      "title": "Flags",
+      "description": "An overlapping stack of inline-SVG US, France, and Malaysia flags that fans out into an even row on group hover. Black border in light mode, white in dark."
+    },
+    {
+      "name": "reveal",
+      "type": "registry:ui",
+      "title": "Reveal",
+      "description": "A scroll and mount triggered fade-up wrapper with a staggered index delay and reduced-motion support."
+    },
+    {
+      "name": "free-tag",
+      "type": "registry:ui",
+      "title": "Free Tag",
+      "description": "A manila hang-tag on twine that tugs toward your cursor and snaps back with elastic rubber-band physics."
+    },
+    {
+      "name": "site-cursor",
+      "type": "registry:ui",
+      "title": "Site Cursor",
+      "description": "A custom follower cursor: a dot that expands into a label when hovering interactive elements."
+    },
+    {
+      "name": "hand-write",
+      "type": "registry:ui",
+      "title": "Handwriting",
+      "description": "A ghost hand writes a phrase in white marker one letter at a time, arc-length timed for constant pen velocity, then a whiteboard eraser scrubs it away in serpentine passes. Frosted play, pause, and replay control."
+    },
+    {
+      "name": "push-button",
+      "type": "registry:ui",
+      "title": "Push Button",
+      "description": "A tactile round push button. The face sits raised on a hard shadow and sinks flush on press, like a real physical key. Ships its own styles."
+    },
+    {
+      "name": "samuel-widget",
+      "type": "registry:ui",
+      "title": "Samuel Widget",
+      "description": "A draggable memoji that opens into a little messenger: profile, Seattle time and weather, a 3D globe, and an intro video."
+    },
+    {
+      "name": "wok-logo",
+      "type": "registry:ui",
+      "title": "Wok Logo",
+      "description": "A minimal wok mark with rising steam lines that renders in the current text color."
+    },
+    {
+      "name": "cat-mark",
+      "type": "registry:ui",
+      "title": "Cat Mark",
+      "description": "A side-profile cat silhouette with ears, four legs, and a curling tail, filled in the current text color."
+    },
+    {
+      "name": "samuel-ui-wordmark",
+      "type": "registry:ui",
+      "title": "UI Components Wordmark",
+      "description": "A cohesive Nunito lockup with a small blue UI chip, em-relative so it scales from panel title to page hero."
+    },
+    {
+      "name": "design-wordmark",
+      "type": "registry:ui",
+      "title": "Design Wordmark",
+      "description": "The word Design in tight Inter with a thin rainbow prism bar that holographically drifts through the spectrum."
+    },
+    {
+      "name": "video-player",
+      "type": "registry:ui",
+      "title": "Video Player",
+      "description": "Custom video chrome over a native player: click to play, a draggable scrubber, time, and volume."
+    },
+    {
+      "name": "animated-theme-toggler",
+      "type": "registry:ui",
+      "title": "Animated Theme Toggler",
+      "description": "A theme switch that wipes the new theme in from the button with the View Transitions API."
+    },
+    {
+      "name": "cursor",
+      "type": "registry:ui",
+      "title": "Cursor",
+      "description": "A custom follower that trails the pointer. Attach it to any container."
+    },
+    {
+      "name": "dynamic-toolbar",
+      "type": "registry:component",
+      "title": "Dynamic Island Toolbar",
+      "description": "The original personal-site Toolbar, unchanged, with its actual supporting sources and integration guide. Next.js App Router required."
+    },
+    {
+      "name": "morphing-dialog",
+      "type": "registry:ui",
+      "title": "Morphing Dialog",
+      "description": "A trigger that grows into a full dialog with a shared layout morph."
+    },
+    {
+      "name": "background-effects",
+      "type": "registry:ui",
+      "title": "Background Effects",
+      "description": "A single canvas particle engine with eight ambient effects (snow, rain, embers, aurora, dither, stars, bubbles, mist). Theme-aware, reduced-motion safe, and parked to the document so effects scroll with the page."
+    },
+    {
+      "name": "qp-dither",
+      "type": "registry:ui",
+      "title": "Qp Dither",
+      "description": "A Bayer 4x4 ordered dither of a blackletter logo mark. Every kept pixel becomes a dot that scatters on load and converges from the center out, breathes on its own phase, and eases away from the cursor."
+    },
+    {
+      "name": "cat-cursor",
+      "type": "registry:ui",
+      "title": "Cat Cursor",
+      "description": "A pixel cat that chases your cursor, sits when it catches up, and naps when idle. Ships with the oneko sprite."
+    },
+    {
+      "name": "globe-3d",
+      "type": "registry:ui",
+      "title": "3D Globe",
+      "description": "A draggable WebGL earth with Apple Maps-style location pins and idle auto-rotation."
+    },
+    {
+      "name": "canvas-reveal-effect",
+      "type": "registry:ui",
+      "title": "Canvas Reveal Effect",
+      "description": "An animated dot-matrix reveal rendered with a WebGL fragment shader."
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "The workhorse button with six variants and five sizes."
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "A text field with a focus ring and invalid states."
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "A controlled range slider with a square thumb."
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "A portalled Base UI tooltip with a canonical dark pill and a Tip one-liner wrapper."
+    },
+    {
+      "name": "toaster",
+      "type": "registry:ui",
+      "title": "Toaster",
+      "description": "A sonner toaster wired to the theme and popover tokens, with lucide status icons."
+    },
+    {
+      "name": "web-haptics-demo",
+      "type": "registry:ui",
+      "title": "Web Haptics",
+      "description": "A synthesized UI sound pack, no audio files. Warm oscillator cues laddered by weight, with a playable grid and a live toggle, slider, and confirm."
+    },
+    {
+      "name": "agent-roster",
+      "type": "registry:ui",
+      "title": "Agent Roster",
+      "description": "A marquee row of pixel-art avatar faces riding a conveyor belt, with edge blur, play/pause, and a speed slider. Each face plays its GIF on hover."
+    },
+    {
+      "name": "prose-kit",
+      "type": "registry:ui",
+      "title": "Prose Kit",
+      "description": "An inline rich-text toolkit: colored words, display-face words, hover tooltips, and vector media placeholders for post bodies."
+    },
+    {
+      "name": "ig-gradient",
+      "type": "registry:ui",
+      "title": "Instagram Gradient",
+      "description": "A hidden SVG defs block exposing the authentic Instagram brand gradient as url(#ig-gradient), so any glyph or shape can fill with it."
+    },
+    {
+      "name": "reading-gif-panel",
+      "type": "registry:component",
+      "title": "Reading GIF Panel",
+      "description": "The original samhc.us reading panel, with all five social buttons, the train GIF, overlapping book covers, and morphing purchase dialogs. Original sources and assets preserved."
+    }
+  ]
+}

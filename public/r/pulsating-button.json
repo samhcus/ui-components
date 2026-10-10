@@ -1,0 +1,34 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pulsating-button",
+  "type": "registry:ui",
+  "title": "Pulsating Button",
+  "description": "A button that emits an expanding ring. Pulse or ripple, any color. Ships its own keyframes.",
+  "author": "Samuel (https://samhc.us)",
+  "css": {
+    "@keyframes samuel-pulse": {
+      "0%, 100%": {
+        "box-shadow": "0 0 0 0 var(--pulse-color, var(--samuel-bg, currentColor))"
+      },
+      "50%": {
+        "box-shadow": "0 0 0 var(--distance, 8px) transparent"
+      }
+    },
+    "@keyframes samuel-pulse-ripple": {
+      "0%": {
+        "box-shadow": "0 0 0 0 var(--pulse-color, var(--samuel-bg, currentColor))"
+      },
+      "100%": {
+        "box-shadow": "0 0 0 var(--distance, 8px) transparent"
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "registry/samuel/pulsating-button.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/pulsating-button.tsx",
+      "content": "\"use client\";\n\nimport React, { useImperativeHandle, useLayoutEffect, useRef } from \"react\";\n\nimport { cn } from \"@/lib/utils\";\n\ninterface PulsatingButtonProps\n  extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  /** Ring color. Defaults to the button's own background color. */\n  pulseColor?: string;\n  /** One pulse cycle, e.g. \"1.5s\". */\n  duration?: string;\n  /** How far the ring expands, e.g. \"8px\". */\n  distance?: string;\n  variant?: \"pulse\" | \"ripple\";\n}\n\n/**\n * Pulsating Button — a button that emits an expanding ring. The ring color\n * tracks the button's own background unless `pulseColor` is set. Ships its own\n * keyframes (samuel-pulse / samuel-pulse-ripple) so it never collides with\n * Tailwind's built-in animate-pulse.\n */\nexport const PulsatingButton = React.forwardRef<\n  HTMLButtonElement,\n  PulsatingButtonProps\n>(\n  (\n    {\n      className,\n      children,\n      pulseColor,\n      duration = \"1.5s\",\n      distance = \"8px\",\n      variant = \"pulse\",\n      ...props\n    },\n    ref\n  ) => {\n    const innerRef = useRef<HTMLButtonElement>(null);\n    useImperativeHandle(ref, () => innerRef.current!);\n\n    useLayoutEffect(() => {\n      const button = innerRef.current;\n      if (!button) return;\n\n      if (pulseColor) {\n        button.style.removeProperty(\"--samuel-bg\");\n        return;\n      }\n\n      let animationFrameId = 0;\n      let currentBg = \"\";\n\n      const updateBg = () => {\n        animationFrameId = 0;\n        const nextBg = getComputedStyle(button).backgroundColor;\n        if (nextBg === currentBg) return;\n        currentBg = nextBg;\n        button.style.setProperty(\"--samuel-bg\", nextBg);\n      };\n\n      const scheduleBgUpdate = () => {\n        if (animationFrameId) return;\n        animationFrameId = window.requestAnimationFrame(updateBg);\n      };\n\n      updateBg();\n\n      const themeObserver = new MutationObserver(scheduleBgUpdate);\n      themeObserver.observe(document.documentElement, {\n        attributes: true,\n        attributeFilter: [\"class\"],\n      });\n\n      const buttonObserver = new MutationObserver(scheduleBgUpdate);\n      buttonObserver.observe(button, { attributes: true });\n\n      const syncEvents = [\"blur\", \"focus\", \"pointerenter\", \"pointerleave\"] as const;\n      for (const eventName of syncEvents) {\n        button.addEventListener(eventName, scheduleBgUpdate);\n      }\n\n      return () => {\n        if (animationFrameId) window.cancelAnimationFrame(animationFrameId);\n        themeObserver.disconnect();\n        buttonObserver.disconnect();\n        for (const eventName of syncEvents) {\n          button.removeEventListener(eventName, scheduleBgUpdate);\n        }\n      };\n    }, [pulseColor]);\n\n    return (\n      <button\n        ref={innerRef}\n        className={cn(\n          \"bg-primary text-primary-foreground relative flex cursor-pointer items-center justify-center rounded-lg px-4 py-2 text-center\",\n          className\n        )}\n        style={\n          {\n            ...(pulseColor && { \"--pulse-color\": pulseColor }),\n            \"--duration\": duration,\n            \"--distance\": distance,\n          } as React.CSSProperties\n        }\n        {...props}\n      >\n        <span className=\"relative z-10\">{children}</span>\n        <span\n          aria-hidden=\"true\"\n          className={cn(\n            \"pointer-events-none absolute inset-0 rounded-[inherit] bg-inherit\",\n            variant === \"pulse\"\n              ? \"animate-[samuel-pulse_var(--duration,1.5s)_ease-out_infinite]\"\n              : \"animate-[samuel-pulse-ripple_var(--duration,1.5s)_cubic-bezier(0.16,1,0.3,1)_infinite]\"\n          )}\n        />\n      </button>\n    );\n  }\n);\n\nPulsatingButton.displayName = \"PulsatingButton\";\n"
+    }
+  ]
+}

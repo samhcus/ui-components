@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ig-gradient",
+  "type": "registry:ui",
+  "title": "Instagram Gradient",
+  "description": "A hidden SVG defs block exposing the authentic Instagram brand gradient as url(#ig-gradient), so any glyph or shape can fill with it.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/ig-gradient.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/ig-gradient.tsx",
+      "content": "/**\n * The authentic Instagram gradient, defined once for the whole document.\n * Any Instagram glyph fills with `fill: url(#ig-gradient)` on hover (see the\n * `.social-instagram` rules in globals.css). Rendered a single time at the root\n * so the id is unique — nav and the \"Meet Samuel\" widget both reference it.\n * The light-mode first-stop swap is handled in globals.css.\n */\nexport function IgGradientDefs() {\n  return (\n    <svg aria-hidden=\"true\" focusable=\"false\" className=\"absolute h-0 w-0\">\n      <defs>\n        <linearGradient id=\"ig-gradient\" x1=\"0\" y1=\"1\" x2=\"1\" y2=\"0\">\n          <stop offset=\"0%\" stopColor=\"#FEDA75\" />\n          <stop offset=\"25%\" stopColor=\"#FA7E1E\" />\n          <stop offset=\"50%\" stopColor=\"#D62976\" />\n          <stop offset=\"75%\" stopColor=\"#962FBF\" />\n          <stop offset=\"100%\" stopColor=\"#4F5BD5\" />\n        </linearGradient>\n      </defs>\n    </svg>\n  );\n}\n"
+    }
+  ]
+}

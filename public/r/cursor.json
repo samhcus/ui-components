@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cursor",
+  "type": "registry:ui",
+  "title": "Cursor",
+  "description": "A custom follower that trails the pointer. Attach it to any container.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/cursor.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/cursor.tsx",
+      "content": "'use client';\n\nimport React, { useEffect, useState, useRef } from 'react';\nimport {\n  motion,\n  type SpringOptions,\n  useMotionValue,\n  useSpring,\n  AnimatePresence,\n  type Transition,\n  type Variant,\n} from 'motion/react';\nimport { cn } from '@/lib/utils';\n\nexport type CursorProps = {\n  children: React.ReactNode;\n  className?: string;\n  springConfig?: SpringOptions;\n  attachToParent?: boolean;\n  transition?: Transition;\n  variants?: {\n    initial: Variant;\n    animate: Variant;\n    exit: Variant;\n  };\n  onPositionChange?: (x: number, y: number) => void;\n};\n\nexport function Cursor({\n  children,\n  className,\n  springConfig,\n  attachToParent,\n  variants,\n  transition,\n  onPositionChange,\n}: CursorProps) {\n  const cursorX = useMotionValue(0);\n  const cursorY = useMotionValue(0);\n  const cursorRef = useRef<HTMLDivElement>(null);\n  const [isVisible, setIsVisible] = useState(!attachToParent);\n\n  useEffect(() => {\n    if (typeof window !== 'undefined') {\n      cursorX.set(window.innerWidth / 2);\n      cursorY.set(window.innerHeight / 2);\n    }\n  }, []);\n\n  useEffect(() => {\n    if (!attachToParent) {\n      document.body.style.cursor = 'none';\n    } else {\n      document.body.style.cursor = 'auto';\n    }\n    const updatePosition = (e: MouseEvent) => {\n      cursorX.set(e.clientX);\n      cursorY.set(e.clientY);\n      onPositionChange?.(e.clientX, e.clientY);\n    };\n    document.addEventListener('mousemove', updatePosition);\n    return () => {\n      document.removeEventListener('mousemove', updatePosition);\n    };\n  }, [cursorX, cursorY, onPositionChange]);\n\n  const cursorXSpring = useSpring(cursorX, springConfig ?? { duration: 0 });\n  const cursorYSpring = useSpring(cursorY, springConfig ?? { duration: 0 });\n\n  useEffect(() => {\n    if (!attachToParent || !cursorRef.current) return;\n    const parent = cursorRef.current.parentElement;\n    if (!parent) return;\n\n    const show = () => {\n      parent.style.cursor = 'none';\n      setIsVisible(true);\n    };\n    const hide = () => {\n      parent.style.cursor = 'auto';\n      setIsVisible(false);\n    };\n\n    parent.addEventListener('mouseenter', show);\n    parent.addEventListener('mouseleave', hide);\n\n    return () => {\n      parent.removeEventListener('mouseenter', show);\n      parent.removeEventListener('mouseleave', hide);\n    };\n  }, [attachToParent]);\n\n  return (\n    <AnimatePresence>\n      {isVisible && (\n        <motion.div\n          ref={cursorRef}\n          className={cn('pointer-events-none fixed left-0 top-0 z-50', className)}\n          style={{\n            x: cursorXSpring,\n            y: cursorYSpring,\n            translateX: '-50%',\n            translateY: '-50%',\n          }}\n          variants={variants}\n          initial=\"initial\"\n          animate=\"animate\"\n          exit=\"exit\"\n          transition={transition}\n        >\n          {children}\n        </motion.div>\n      )}\n    </AnimatePresence>\n  );\n}\n"
+    }
+  ]
+}

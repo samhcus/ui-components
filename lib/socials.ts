@@ -1,0 +1,17 @@
+export const DISCORD_INVITE = "https://discord.gg/uz7gvHdUvz";
+export const SITE_EMAIL = "samhcus@atomicmail.io";
+
+/** Samuel's accounts — one identity, used everywhere */
+export const samuelSocials = [
+  { label: "GitHub", handle: "@samhcus", href: "https://github.com/samhcus" },
+  { label: "Twitter", handle: "@samhcus", href: "https://x.com/samhcus" },
+  { label: "Instagram", handle: "@samhcus", href: "https://instagram.com/samhcus" },
+  { label: "YouTube", handle: "@samhcus", href: "https://youtube.com/@samhcus" },
+  { label: "LinkedIn", handle: "@samhcus", href: "https://www.linkedin.com/in/samhc/" },
+] as const;
+
+/** Footer links: socials plus the Discord */
+export const socials = [
+  ...samuelSocials,
+  { label: "Discord", handle: "Samuel's Discord", href: DISCORD_INVITE },
+] as const;

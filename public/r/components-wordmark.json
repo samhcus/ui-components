@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "components-wordmark",
+  "type": "registry:ui",
+  "title": "Components Wordmark",
+  "description": "A clean product lockup: a small tracked eyebrow over a two-part name with an accent token. Relabel via props.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/components-wordmark.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/components-wordmark.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n/**\n * ComponentsWordmark — a clean product lockup: a small tracked eyebrow over a\n * two-part name, with the first token carried in an accent color. Font-size\n * comes from `className`; colors inherit from the theme. Pass your own eyebrow,\n * accent, and rest tokens to relabel it.\n */\nexport function ComponentsWordmark({\n  eyebrow = \"Samuel's\",\n  accent = \"UI\",\n  rest = \"Components\",\n  className,\n}: {\n  eyebrow?: string;\n  accent?: string;\n  rest?: string;\n  className?: string;\n}) {\n  return (\n    <span\n      className={cn(\"inline-flex select-none flex-col leading-none tracking-tight\", className)}\n      aria-label={`${eyebrow} ${accent} ${rest}`}\n    >\n      <span\n        className=\"font-semibold uppercase text-muted-foreground/60\"\n        style={{ fontSize: \"0.5em\", letterSpacing: \"0.14em\" }}\n      >\n        {eyebrow}\n      </span>\n      <span className=\"mt-[0.35em] inline-flex items-baseline gap-[0.25em] font-semibold text-foreground\">\n        <span>{accent}</span>\n        <span>{rest}</span>\n      </span>\n    </span>\n  );\n}\n\nexport default ComponentsWordmark;\n"
+    }
+  ]
+}

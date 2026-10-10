@@ -1,0 +1,89 @@
+/* Reading-gif social dock — each frosted-glass chip carries a clean brand-coloured
+   holographic glow border AT REST: Instagram = the true multi-stop gradient border,
+   YouTube red, LinkedIn blue, GitHub white, coffee yellow — colour on the 1.75px
+   border only, no glow, over the frosted glass. Hover escalates into the full brand
+   fill (still no glow). Fixed footprint — press-scale is inline in Tailwind so the row
+   never reflows. Hover fills gated behind (hover:hover) so a tap never leaves one stuck. */
+.rs-chip {
+  position: relative;
+  border: 2px solid transparent;
+}
+/* Rest = the brand colour on the border only, no coloured glow. The single soft
+   dark drop-shadow is grounding (separates the chip from the busy gif), not a glow. */
+.rs-youtube {
+  border-color: rgba(255, 0, 0, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+.rs-linkedin {
+  border-color: rgba(10, 102, 194, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+.rs-github {
+  border-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+.rs-coffee {
+  border-color: rgba(255, 221, 0, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+/* Instagram wears the same frosted glass as the others (the chip's bg-white/10 shows
+   through), with the multi-stop gradient painted as a real BORDER RING via a masked
+   ::before — not a fill. The old two-layer padding-box/border-box trick let the full
+   border-box gradient bleed through the semi-transparent padding layer, so the whole
+   chip read as a solid gradient tile instead of an outline. The mask (border-box minus
+   content-box) leaves only the 2px ring, and unlike border-image it respects the
+   chip's border radius. */
+.rs-instagram {
+  /* No transparent border here: it would inset the ::before to the padding box,
+     shrinking the gradient ring inside the other chips' edge-flush borders. With
+     border:0 the ::before spans the full box and the 2px ring sits at the edge. */
+  border: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+.rs-instagram::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(45deg, #f56040 0%, #fa7e1e 24%, #d62976 55%, #962fbf 78%, #4f5bd5 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .rs-chip:hover {
+    color: #fff;
+  }
+  /* Hover blooms to the full brand fill — still no coloured glow, just the neutral
+     grounding shadow. */
+  .rs-instagram:hover {
+    background: linear-gradient(45deg, #f56040 0%, #fa7e1e 24%, #d62976 55%, #962fbf 78%, #4f5bd5 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  .rs-youtube:hover {
+    background: #FF0000;
+    border-color: rgba(255, 0, 0, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  .rs-linkedin:hover {
+    background: #0A66C2;
+    border-color: rgba(10, 102, 194, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  .rs-github:hover {
+    background: #ffffff;
+    color: #18181b;
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  .rs-coffee:hover {
+    background: #FFDD00;
+    color: #18181b;
+    border-color: rgba(255, 221, 0, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+

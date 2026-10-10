@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "rage-button",
+  "type": "registry:ui",
+  "title": "Rage Button",
+  "description": "A button that snaps down on press and spits a burst of particles. Ship angry.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/rage-button.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/rage-button.tsx",
+      "content": "\"use client\";\n\nimport { useRef, useState } from \"react\";\nimport { AnimatePresence, motion, useReducedMotion } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\ninterface Particle {\n  id: number;\n  x: number;\n  y: number;\n  r: number;\n}\n\n/**\n * Rage Button — a button that snaps down on press and spits a burst of\n * particles. Ship angry. Emoji is configurable; falls back to a clean press if\n * the user prefers reduced motion.\n */\nexport function RageButton({\n  children = \"Ship it\",\n  emoji = \"😤\",\n  count = 9,\n  className,\n  onClick,\n  ...props\n}: React.ButtonHTMLAttributes<HTMLButtonElement> & {\n  emoji?: string;\n  /** Particles per press. */\n  count?: number;\n}) {\n  const [particles, setParticles] = useState<Particle[]>([]);\n  const idRef = useRef(0);\n  const reduce = useReducedMotion();\n\n  const burst = (e: React.MouseEvent<HTMLButtonElement>) => {\n    if (!reduce) {\n      const next: Particle[] = Array.from({ length: count }, () => {\n        const angle = Math.random() * Math.PI * 2;\n        const dist = 26 + Math.random() * 36;\n        return {\n          id: idRef.current++,\n          x: Math.cos(angle) * dist,\n          y: Math.sin(angle) * dist - 12,\n          r: (Math.random() - 0.5) * 70,\n        };\n      });\n      setParticles((p) => [...p, ...next]);\n      const ids = new Set(next.map((n) => n.id));\n      window.setTimeout(\n        () => setParticles((p) => p.filter((x) => !ids.has(x.id))),\n        750\n      );\n    }\n    onClick?.(e);\n  };\n\n  return (\n    <button\n      onClick={burst}\n      className={cn(\n        \"relative inline-flex items-center justify-center rounded-xl bg-foreground px-4 py-2 text-sm font-semibold text-background transition-transform duration-100 active:scale-90\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n      <span className=\"pointer-events-none absolute inset-0 flex items-center justify-center\">\n        <AnimatePresence>\n          {particles.map((p) => (\n            <motion.span\n              key={p.id}\n              initial={{ opacity: 1, x: 0, y: 0, scale: 0.5, rotate: 0 }}\n              animate={{ opacity: 0, x: p.x, y: p.y, scale: 1.15, rotate: p.r }}\n              transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1] }}\n              className=\"absolute select-none text-base\"\n            >\n              {emoji}\n            </motion.span>\n          ))}\n        </AnimatePresence>\n      </span>\n    </button>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "samuel-wordmark",
+  "type": "registry:ui",
+  "title": "Samuel Wordmark",
+  "description": "A name set in a single editorial serif italic, built to run large and centered as a masthead. Pulls the serif via next/font.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/samuel-wordmark.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/samuel-wordmark.tsx",
+      "content": "import { Instrument_Serif } from \"next/font/google\";\nimport { cn } from \"@/lib/utils\";\n\n// An editorial serif italic — reads like an engraved masthead rather than a\n// casual signature. One expressive weight, high contrast, premium at large size.\nconst editorial = Instrument_Serif({\n  subsets: [\"latin\"],\n  weight: \"400\",\n  style: \"italic\",\n});\n\n/**\n * \"Samuel\" wordmark — the name set in a single editorial serif italic. No\n * shadow, no underline. Inherits color from the parent; `className` sets the\n * font-size. Built to run large and centered as a masthead. Swap the label via\n * `children` to reuse the treatment for any name.\n */\nexport function SamuelWordmark({\n  children = \"Samuel\",\n  className,\n}: {\n  children?: React.ReactNode;\n  className?: string;\n}) {\n  return (\n    <span\n      className={cn(\n        editorial.className,\n        \"select-none italic leading-[0.9] tracking-[-0.01em]\",\n        className,\n      )}\n      aria-label={typeof children === \"string\" ? children : \"Samuel\"}\n    >\n      {children}\n    </span>\n  );\n}\n\nexport default SamuelWordmark;\n"
+    }
+  ]
+}

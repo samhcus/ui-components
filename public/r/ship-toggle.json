@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "ship-toggle",
+  "type": "registry:ui",
+  "title": "Ship Toggle",
+  "description": "A tactile two-state switch (draft to shipped). The knob slides between halves with a spring.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/ship-toggle.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/ship-toggle.tsx",
+      "content": "\"use client\";\n\nimport { motion } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\nconst SPRING = { type: \"spring\", stiffness: 480, damping: 34 } as const;\n\n/**\n * Ship Toggle — a tactile two-state switch (draft ⇄ shipped). The knob slides\n * between halves with a spring via a shared layoutId. Semantically a switch.\n */\nexport function ShipToggle({\n  checked,\n  onCheckedChange,\n  labels = { on: \"Shipped\", off: \"Draft\" },\n  className,\n}: {\n  checked: boolean;\n  onCheckedChange: (value: boolean) => void;\n  labels?: { on: string; off: string };\n  className?: string;\n}) {\n  return (\n    <button\n      type=\"button\"\n      role=\"switch\"\n      aria-checked={checked}\n      onClick={() => onCheckedChange(!checked)}\n      className={cn(\n        \"relative grid h-9 w-[136px] grid-cols-2 gap-1 rounded-2xl border border-border bg-muted p-1\",\n        className\n      )}\n    >\n      <span className=\"relative flex items-center justify-center rounded-full\">\n        {!checked && (\n          <motion.span\n            layoutId=\"ship-toggle-knob\"\n            transition={SPRING}\n            className=\"absolute inset-0 rounded-xl bg-background shadow-sm\"\n          />\n        )}\n        <span\n          className={cn(\n            \"relative z-10 text-[12px] font-medium transition-colors duration-200\",\n            !checked ? \"text-foreground\" : \"text-muted-foreground/50\"\n          )}\n        >\n          {labels.off}\n        </span>\n      </span>\n\n      <span className=\"relative flex items-center justify-center rounded-full\">\n        {checked && (\n          <motion.span\n            layoutId=\"ship-toggle-knob\"\n            transition={SPRING}\n            className=\"absolute inset-0 rounded-xl bg-primary shadow-sm\"\n          />\n        )}\n        <span\n          className={cn(\n            \"relative z-10 text-[12px] font-medium transition-colors duration-200\",\n            checked ? \"text-primary-foreground\" : \"text-muted-foreground/50\"\n          )}\n        >\n          {labels.on}\n        </span>\n      </span>\n    </button>\n  );\n}\n"
+    }
+  ]
+}

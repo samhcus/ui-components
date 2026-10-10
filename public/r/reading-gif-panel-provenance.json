@@ -1,0 +1,92 @@
+{
+  "sourceCommit": "23bb52e848108f2bfb81d767d4a98abe949380bb",
+  "sources": [
+    {
+      "original": "components/reading-section.tsx",
+      "snapshot": "registry/samuel/reading-panel/source/components/reading-section.tsx.txt",
+      "sha256": "61d26158f9f289ac205eef5d71f3b050e40895fbb51e5e76a98fdadd7d92de6f"
+    },
+    {
+      "original": "components/brand/social-dock.tsx",
+      "snapshot": "registry/samuel/reading-panel/source/components/brand/social-dock.tsx.txt",
+      "sha256": "ab00097044fdf7953482df8e179bde011e13e6dac3737de38140165db1612002"
+    },
+    {
+      "original": "lib/reading.ts",
+      "snapshot": "registry/samuel/reading-panel/source/lib/reading.ts.txt",
+      "sha256": "6c9252ca616d270dbaac2e86ba1c7505312bed8474bafb5c6adb74f22fe04bd2"
+    },
+    {
+      "original": "app/globals.css",
+      "snapshot": "registry/samuel/reading-panel/source/app/globals.css.txt",
+      "sha256": "33763b280889edae37fd157149055acf828fec8bb53c73f1e71e1a4b02fe8902"
+    },
+    {
+      "original": "app/layout.tsx",
+      "snapshot": "registry/samuel/reading-panel/source/app/layout.tsx.txt",
+      "sha256": "17675cab2ddd591d3f5fb7d342f4740e167d27ce46a47851528db2425f871c8c"
+    },
+    {
+      "original": "components/ui/button.tsx",
+      "snapshot": "registry/samuel/reading-panel/source/components/ui/button.tsx.txt",
+      "sha256": "4f201726190dcd57addf10310317bb913a4df10c954801fe0931c4e5f53112fa"
+    },
+    {
+      "original": "components/ui/tooltip.tsx",
+      "snapshot": "registry/samuel/reading-panel/source/components/ui/tooltip.tsx.txt",
+      "sha256": "48eff9f518b3827355219239177c5ffdf25533ef48e221861e84a15fa84f0017"
+    },
+    {
+      "original": "components/motion-primitives/morphing-dialog.tsx",
+      "snapshot": "registry/samuel/reading-panel/source/components/motion-primitives/morphing-dialog.tsx.txt",
+      "sha256": "a8c7d07025eb52d6b9e0b460deb7529b25944bfeff448d56d9b56334569f1961"
+    },
+    {
+      "original": "hooks/useClickOutside.tsx",
+      "snapshot": "registry/samuel/reading-panel/source/hooks/useClickOutside.tsx.txt",
+      "sha256": "a239b751802f4a67e13d962bdf18118f7b24c7806a3f2ab3c41eca199d624445"
+    },
+    {
+      "original": "lib/utils.ts",
+      "snapshot": "registry/samuel/reading-panel/source/lib/utils.ts.txt",
+      "sha256": "78c0437e504a2fc89836ed92e2d56a4e8027b765d1ba529d62266b18b55e6b1e"
+    },
+    {
+      "original": "components/ui/sonner.tsx",
+      "snapshot": "registry/samuel/reading-panel/source/components/ui/sonner.tsx.txt",
+      "sha256": "2dd975ad2170ba2570b00e58713dcbda90f26a7fffdaceb1ef7255f450c2d2a6"
+    },
+    {
+      "original": "components/brand/ig-gradient.tsx",
+      "snapshot": "registry/samuel/reading-panel/source/components/brand/ig-gradient.tsx.txt",
+      "sha256": "4715bda36b82af24d0530e5a729f71b666bf8279d5c75a01e9749ce79354bb7e"
+    },
+    {
+      "original": "components/mobile-scale.tsx",
+      "snapshot": "registry/samuel/reading-panel/source/components/mobile-scale.tsx.txt",
+      "sha256": "c4a60f826f412896dac7233272e0e5d8e51b4a41841f8fd55ac7de1aaf5348ec"
+    },
+    {
+      "original": "public/reading/reading.gif",
+      "snapshot": "registry/samuel/reading-panel/source/public/reading/reading.gif",
+      "sha256": "ce6fa6df4767ced751bd99538b0511a5c5255d4ec8a65c921210a8fd291eaa7e"
+    },
+    {
+      "original": "public/reading/worldwarz-cover.jpg",
+      "snapshot": "registry/samuel/reading-panel/source/public/reading/worldwarz-cover.jpg",
+      "sha256": "b50425059ca9706eb32b85be25c6e24a013452fce719d61f46a8223018c473bb"
+    },
+    {
+      "original": "public/reading/aisnakeoil.png",
+      "snapshot": "registry/samuel/reading-panel/source/public/reading/aisnakeoil.png",
+      "sha256": "bc4a286c59349b6c20e8b39375e056ec4a0f61da66fffe520efeb0d512b3cc64"
+    },
+    {
+      "original": "lib/socials.ts",
+      "snapshot": "registry/samuel/reading-panel/source/lib/socials.ts.txt",
+      "sha256": "7590b416904494a1da913018bec9d6b6df177384a2e45a74f640ea90dd364e15"
+    }
+  ],
+  "example": "/examples/reading-gif-panel",
+  "archive": "/r/reading-gif-panel-example.zip"
+}

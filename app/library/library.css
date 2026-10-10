@@ -1,0 +1,53 @@
+/* Library layout is fluid independently of the personal site's fixed canvas. */
+body:has([data-library]), body:has([data-example]) { width: 100%; min-width: 0; max-width: 100%; margin-inline: 0; zoom: 1; }
+[data-library] { min-height: 100dvh; --library-accent: #2563eb; }
+[data-library] :is(button, a, input, select):focus-visible { outline: 2px solid #3b82f6; outline-offset: 4px; }
+.library-header { display:flex; align-items:center; gap:40px; min-height:80px; padding:16px 40px; border-bottom:1px solid var(--border); }
+.library-logo { font-family:var(--font-nunito); font-weight:800; font-size:24px; white-space:nowrap; letter-spacing:-.05em; }
+.library-logo span { display:inline-block; padding:0 7px 2px; background:#2563eb; color:white; border-radius:7px; margin-left:4px; }
+.library-header nav { display:flex; align-items:center; gap:26px; font-size:13px; color:var(--muted-foreground); }
+.library-header nav [aria-current] { color:var(--foreground); text-decoration:underline; text-underline-offset:9px; text-decoration-color:#3b82f6; }
+.library-header-actions { margin-left:auto; display:flex; gap:20px; align-items:center; font-size:12px; }
+.library-header-actions a { display:flex; align-items:center; gap:3px; }
+.library-header-actions button { display:grid; place-items:center; width:34px; height:34px; border:1px solid var(--border); border-radius:50%; }
+.library-skip { position:fixed; left:16px; top:-100px; z-index:100; padding:12px; background:var(--foreground); color:var(--background); border-radius:8px; }
+.library-skip:focus { top:16px; }
+.library-heading { margin-bottom:40px; max-width:720px; }
+.library-eyebrow { font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:var(--muted-foreground); }
+.library-heading h1 { font-size:clamp(32px,4vw,56px); line-height:1.08; font-weight:600; letter-spacing:-.055em; margin:14px 0; }
+.library-heading p:last-child { color:var(--muted-foreground); font-size:15px; line-height:1.7; max-width:540px; }
+.library-footer { display:flex; justify-content:space-between; gap:16px; margin:0 40px; padding:28px 0; border-top:1px solid var(--border); font-size:12px; color:var(--muted-foreground); }
+.library-footer a:hover { color:var(--foreground); }
+.library-page { padding:48px 40px 80px; max-width:1500px; margin:auto; }
+.library-spotlight { margin-bottom:48px; }
+.library-spotlight-meta { display:flex; align-items:flex-start; justify-content:space-between; gap:28px; padding:24px 0; }
+.library-spotlight-meta h2 { font-size:24px; font-weight:600; letter-spacing:-.035em; margin:8px 0; }
+.library-spotlight-meta p { max-width:560px; font-size:14px; line-height:1.7; color:var(--muted-foreground); }
+.library-spotlight-install { width:330px; max-width:100%; flex-shrink:0; padding-top:12px; }
+.library-spotlight-actions { display:flex; align-items:center; flex-wrap:wrap; gap:16px; margin-top:12px; }
+.example-window { width:100%; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--muted); }
+.example-chrome { height:44px; display:flex; align-items:center; justify-content:space-between; gap:10px; padding:0 12px; background:var(--card); border-bottom:1px solid var(--border); color:var(--muted-foreground); font-size:11px; }
+.example-address { display:flex; gap:15px; align-items:center; }
+.example-address > span { font-size:9px; letter-spacing:2px; opacity:.35; }
+.example-chrome button { display:flex; align-items:center; gap:6px; padding:6px 8px; border-radius:6px; }
+.example-chrome button:hover { color:var(--foreground); background:var(--muted); }
+.example-viewport { display:flex; justify-content:center; height:560px; }
+.example-frame { display:block; border:0; width:100%; height:100%; background:#fafaf9; }
+.example-phone { max-width:390px; }
+.example-caption { padding:10px 14px; font-size:11px; color:var(--muted-foreground); background:var(--card); border-top:1px solid var(--border); }
+.library-resources { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+.library-resource { padding-bottom:24px; border-bottom:1px solid var(--border); min-width:0; }
+.library-resource h2 { font-size:18px; font-weight:600; margin:18px 0 8px; letter-spacing:-.025em; }
+.library-resource p { font-size:13px; line-height:1.8; color:var(--muted-foreground); }
+.library-resource-actions { display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:14px; }
+.library-resource a { display:inline-flex; gap:5px; align-items:center; min-height:28px; font-size:12px; color:var(--foreground); text-decoration:underline; text-underline-offset:4px; }
+.library-resource a:hover { color:var(--muted-foreground); }
+.asset-preview { min-height:180px; border:1px solid var(--border); background:var(--muted); display:flex; align-items:center; justify-content:center; overflow:hidden; border-radius:12px; padding:20px; }
+.library-note { display:grid; grid-template-columns:90px 1fr; gap:24px; padding:30px 0; border-top:1px solid var(--border); }
+.library-note h2 { font-size:22px; font-weight:600; letter-spacing:-.025em; margin-bottom:12px; }
+.library-note p { max-width:700px; font-size:14px; line-height:1.8; color:var(--muted-foreground); margin-bottom:12px; }
+.library-note a { font-size:13px; text-decoration:underline; text-underline-offset:4px; }
+@media (min-width:960px) { [data-library] .library-mobile { display:none; } [data-library] .library-rail { display:block; width:210px; } [data-library] .library-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (min-width:1500px) { [data-library] .library-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width:959px) { [data-library] .library-mobile { display:block; } [data-library] .library-rail { display:none; } [data-library] .library-columns { gap:0; margin-top:28px; } .library-spotlight-meta { flex-direction:column; gap:8px; } .library-spotlight-install { width:100%; } .library-resources { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:600px) { .library-header { gap:18px; flex-wrap:wrap; padding:18px 20px; } .library-header nav { order:3; width:100%; gap:24px; padding:4px 0; } .library-logo { font-size:22px; } .library-header-actions { gap:12px; } .library-page { padding:32px 20px 60px; } .library-footer { flex-wrap:wrap; margin:0 20px; } .library-footer > span:nth-child(2) { display:none; } .library-resources { grid-template-columns:1fr; } .library-note { grid-template-columns:1fr; gap:8px; } .example-address { font-size:10px; gap:6px; } .example-address > span { display:none; } .example-viewport { height:520px; } }

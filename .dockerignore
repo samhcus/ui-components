@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.claude
+.agents
+data
+*.tsbuildinfo
+.env
+.env.*
+!.env.local.example
+*.pem
+.vercel
+Dockerfile
+.dockerignore

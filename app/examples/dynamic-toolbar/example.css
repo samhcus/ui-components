@@ -1,0 +1,19 @@
+body:has([data-example]) {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  margin-inline: 0;
+  zoom: 1;
+}
+.toolbar-example {
+  padding: 20px 24px 160px;
+  min-height: 100dvh;
+}
+.toolbar-example h1 { font-size: 24px; font-weight: 600; }
+.example-text { list-style: disc; padding-left: 20px; margin: 16px 0 20px; }
+.example-text li { margin: 4px 0; font-size: 14px; line-height: 1.5; }
+.example-text a { text-decoration: underline; text-underline-offset: 3px; }
+.example-components { display: flex; flex-direction: column; gap: 16px; max-width: 440px; }
+.example-components h2, .example-components label { display: block; margin-bottom: 10px; font-size: 14px; font-weight: 500; }
+.example-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.example-components output { display: block; margin-top: 8px; font-size: 13px; }

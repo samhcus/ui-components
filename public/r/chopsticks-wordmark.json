@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "chopsticks-wordmark",
+  "type": "registry:ui",
+  "title": "Chopsticks Wordmark",
+  "description": "A rounded, friendly bot lockup: a light-blue Nunito name with a small badge alongside. Self-contained via next/font.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/chopsticks-wordmark.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/chopsticks-wordmark.tsx",
+      "content": "import { Nunito } from \"next/font/google\";\nimport { cn } from \"@/lib/utils\";\n\n// Rounded, friendly Nunito — pulled via next/font so the mark is self-contained.\nconst nunito = Nunito({ subsets: [\"latin\"], weight: [\"800\"] });\n\n/**\n * ChopsticksWordmark — a rounded, friendly bot lockup: the name in a light-blue\n * Nunito with a small \"BOT\" badge. Font-size comes from `className`. Pass your\n * own `label`, `badge`, and `color`.\n */\nexport function ChopsticksWordmark({\n  label = \"Chopsticks\",\n  badge = \"BOT\",\n  color = \"#7EC8F2\",\n  className,\n}: {\n  label?: string;\n  badge?: string;\n  color?: string;\n  className?: string;\n}) {\n  return (\n    <span\n      className={cn(\n        nunito.className,\n        \"inline-flex select-none items-center gap-[0.35em] font-extrabold leading-none tracking-tight\",\n        className,\n      )}\n      aria-label={`${label} ${badge}`}\n    >\n      <span style={{ color }}>{label}</span>\n      <span\n        className=\"rounded-[0.28em] font-bold text-white\"\n        style={{ background: color, fontSize: \"0.5em\", padding: \"0.15em 0.4em\" }}\n      >\n        {badge}\n      </span>\n    </span>\n  );\n}\n\nexport default ChopsticksWordmark;\n"
+    }
+  ]
+}

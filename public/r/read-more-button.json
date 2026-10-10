@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "read-more-button",
+  "type": "registry:ui",
+  "title": "Read More Button",
+  "description": "A small pill link whose trailing book icon is closed at rest and opens with a gentle upward lift on hover.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "@phosphor-icons/react"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/read-more-button.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/read-more-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Book, BookOpen } from \"@phosphor-icons/react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * ReadMoreButton — a small pill link whose trailing book icon is closed at rest\n * and opens with a gentle upward lift on hover. Built to sit beside a section\n * heading as a \"read more\" / \"see all\" affordance.\n */\nexport function ReadMoreButton({\n  label = \"Read more\",\n  href = \"#\",\n  className,\n}: {\n  /** Button text. */\n  label?: string;\n  /** Where it links. */\n  href?: string;\n  className?: string;\n}) {\n  return (\n    <a\n      href={href}\n      className={cn(\n        \"group inline-flex shrink-0 items-center gap-1.5 rounded-xl border border-border bg-card px-3 py-1.5 text-[12.5px] font-medium text-foreground transition-colors duration-150 hover:bg-muted/60\",\n        className,\n      )}\n    >\n      {label}\n      {/* Book closes at rest and opens on hover, with a small lift */}\n      <span className=\"relative inline-block h-[14px] w-[14px]\">\n        <Book\n          size={14}\n          weight=\"bold\"\n          className=\"absolute inset-0 text-muted-foreground transition-all duration-200 group-hover:-translate-y-0.5 group-hover:opacity-0\"\n        />\n        <BookOpen\n          size={14}\n          weight=\"fill\"\n          className=\"absolute inset-0 text-foreground opacity-0 transition-all duration-200 group-hover:-translate-y-0.5 group-hover:opacity-100\"\n        />\n      </span>\n    </a>\n  );\n}\n\nexport default ReadMoreButton;\n"
+    }
+  ]
+}

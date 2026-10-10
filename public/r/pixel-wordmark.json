@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pixel-wordmark",
+  "type": "registry:ui",
+  "title": "Pixel Wordmark",
+  "description": "A blocky arcade pixel wordmark where each letter is tinted from a cycling palette. Pulls the pixel font via next/font.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/pixel-wordmark.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/pixel-wordmark.tsx",
+      "content": "import { Press_Start_2P } from \"next/font/google\";\nimport { cn } from \"@/lib/utils\";\n\n// Press Start 2P is the classic blocky arcade pixel face — genuinely pixelated,\n// unlike faces that only read as a stylized sans.\nexport const pixelFont = Press_Start_2P({ subsets: [\"latin\"], weight: \"400\" });\nconst pixel = pixelFont;\n\n/** A ready-made playful palette. */\nexport const PIXEL_COLORS = [\n  \"#FFD700\", \"#FF69B4\", \"#7EC8F2\", \"#22C55E\", \"#E63946\",\n  \"#C084FC\", \"#FF9F1C\", \"#5B8DB8\", \"#F472B6\",\n];\n\n/**\n * PixelWordmark — a colorful pixel-font wordmark where each letter is tinted\n * from a cycling palette. Self-contained: pulls the pixel font via next/font,\n * nothing else. `className` sets the font-size.\n */\nexport function PixelWordmark({\n  text,\n  colors = PIXEL_COLORS,\n  className,\n}: {\n  /** The wordmark text. */\n  text: string;\n  /** Letters cycle through these colors. */\n  colors?: string[];\n  className?: string;\n}) {\n  return (\n    <span\n      className={cn(pixel.className, \"[font-size-adjust:none] inline-flex select-none leading-none tracking-[-0.08em]\", className)}\n      aria-label={text}\n    >\n      {text.split(\"\").map((ch, i) =>\n        ch === \" \" ? (\n          <span key={i} className=\"inline-block w-1\" />\n        ) : (\n          <span key={i} style={{ color: colors[i % colors.length] }}>\n            {ch}\n          </span>\n        ),\n      )}\n    </span>\n  );\n}\n\nexport default PixelWordmark;\n"
+    }
+  ]
+}

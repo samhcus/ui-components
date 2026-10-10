@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "coffee-button",
+  "type": "registry:ui",
+  "title": "Coffee Button",
+  "description": "A frosted-glass support button built to sit over imagery: white text on a translucent, blurred surface with a gentle press.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/coffee-button.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/coffee-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { Coffee } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * CoffeeButton — a frosted-glass \"buy me a coffee\" pill built to sit over\n * imagery or a dark scene. White text on a translucent, blurred surface, with a\n * gentle press. Put it over a photo or gradient so the glass has something to\n * catch.\n */\nexport function CoffeeButton({\n  label = \"Buy me a coffee\",\n  href = \"#\",\n  target = \"_blank\",\n  className,\n}: {\n  /** Button text. */\n  label?: string;\n  /** Where it links. */\n  href?: string;\n  /** Anchor target. Defaults to a new tab. */\n  target?: string;\n  className?: string;\n}) {\n  return (\n    <a\n      href={href}\n      target={target}\n      rel={target === \"_blank\" ? \"noopener noreferrer\" : undefined}\n      className={cn(\n        \"inline-flex select-none items-center gap-1.5 rounded-lg border border-white/20 bg-white/10 px-3.5 py-1.5 text-[12.5px] font-medium text-white backdrop-blur-md transition-[transform,background-color] duration-150 ease-out [@media(hover:hover)]:hover:bg-white/20 active:scale-[0.96]\",\n        className,\n      )}\n    >\n      <Coffee size={14} />\n      {label}\n    </a>\n  );\n}\n\nexport default CoffeeButton;\n"
+    }
+  ]
+}

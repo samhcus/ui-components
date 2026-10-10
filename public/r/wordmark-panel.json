@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "wordmark-panel",
+  "type": "registry:ui",
+  "title": "Wordmark Panel",
+  "description": "A project-style panel titled with a colorful pixel wordmark. Drop any graphic in as the face. Pulls the pixel font via next/font.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/wordmark-panel.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/wordmark-panel.tsx",
+      "content": "import { Pixelify_Sans } from \"next/font/google\";\n\nconst pixel = Pixelify_Sans({ subsets: [\"latin\"], weight: [\"600\", \"700\"] });\n\n/** A pixel-font wordmark: each letter tinted from a cycling palette. */\nfunction Wordmark({\n  text,\n  colors,\n  className = \"\",\n}: {\n  text: string;\n  colors: string[];\n  className?: string;\n}) {\n  return (\n    <span\n      aria-label={text}\n      className={[pixel.className, \"inline-flex select-none font-bold leading-none tracking-tight\", className]\n        .filter(Boolean)\n        .join(\" \")}\n    >\n      {text.split(\"\").map((ch, i) =>\n        ch === \" \" ? (\n          <span key={i} className=\"inline-block w-2\" />\n        ) : (\n          <span key={i} style={{ color: colors[i % colors.length] }}>\n            {ch}\n          </span>\n        )\n      )}\n    </span>\n  );\n}\n\n/** A ready-made playful palette. */\nexport const PIXEL_PALS_COLORS = [\n  \"#FFD700\", \"#FF69B4\", \"#7EC8F2\", \"#22C55E\", \"#E63946\",\n  \"#C084FC\", \"#FF9F1C\", \"#5B8DB8\", \"#F472B6\",\n];\n\n/**\n * A project-style panel titled with a colorful pixel wordmark: a graphic face on\n * top, the wordmark (and optional subtitle) below. Drop any node in as the face.\n * Self-contained — pulls the pixel font via next/font, nothing else.\n */\nexport function WordmarkPanel({\n  text,\n  colors = PIXEL_PALS_COLORS,\n  subtitle,\n  children,\n  className = \"\",\n}: {\n  /** The wordmark text. */\n  text: string;\n  /** Letters cycle through these colors. */\n  colors?: string[];\n  /** Optional line under the wordmark. */\n  subtitle?: string;\n  /** The graphic that fills the face. */\n  children?: React.ReactNode;\n  className?: string;\n}) {\n  return (\n    <div\n      className={[\n        \"group flex w-[220px] flex-col overflow-hidden rounded-2xl border border-border bg-card text-left transition-colors duration-200 [@media(hover:hover)]:hover:border-foreground/20\",\n        className,\n      ]\n        .filter(Boolean)\n        .join(\" \")}\n    >\n      <div className=\"relative h-36 overflow-hidden\">\n        {children ?? (\n          <div\n            aria-hidden\n            className=\"h-full w-full\"\n            style={{ background: \"radial-gradient(120% 90% at 50% 0%, rgba(0,0,0,0.06), transparent 60%)\" }}\n          />\n        )}\n      </div>\n      <div className=\"px-3.5 py-3\">\n        <Wordmark text={text} colors={colors} className=\"text-[24px]\" />\n        {subtitle && (\n          <p className=\"mt-0.5 text-[11px] text-muted-foreground/60\">{subtitle}</p>\n        )}\n      </div>\n    </div>\n  );\n}\n\nexport default WordmarkPanel;\n"
+    }
+  ]
+}

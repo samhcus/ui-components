@@ -1,0 +1,854 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Two fixed scales, not a fluid site. At/above the desktop breakpoint the layout
+   is frozen to a fixed 1152px canvas: it is a FIXED width, not a floor, so it
+   never grows on wide monitors. The snap point IS the canvas width (1152px), so
+   the desktop scale only engages once the viewport can actually hold the whole
+   canvas — wider viewports show symmetric margins around a dead-still canvas, and
+   the canvas never overflows or scrolls horizontally. Below 1152px the mobile
+   design takes over fluidly. The margins reveal <html>, so it carries the page
+   colour. There are exactly two versions of the site and nothing in between. */
+html {
+  background: var(--background);
+  /* Clip the X axis so nothing (a break-out graphic, a strip a few px wider than
+     the canvas) can ever produce a horizontal scroll near the 1152px snap point.
+     `clip` (not `hidden`) leaves vertical scroll untouched and never creates a
+     scroll container; the fixed nav + toolbar sit above it, so they are safe. */
+  overflow-x: clip;
+}
+body {
+  overflow-x: clip;
+}
+@media (min-width: 1152px) {
+  body {
+    width: 1152px;
+    min-width: 1152px;
+    max-width: 1152px;
+    margin-inline: auto;
+  }
+  /* Full-bleed opt-out: a page that renders a [data-fullbleed] marker (the UI
+     component library) breaks out of the fixed 1152px canvas and fills the whole
+     desktop viewport — a true full-width site, not a centred column with dead
+     margins. Only affects that one page; every other route stays on the canvas.
+     Mobile (<1152) is unaffected: it keeps the 390px phone canvas above. */
+  body:has([data-fullbleed]) {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-inline: 0;
+  }
+}
+
+/* Below the desktop canvas the site is the mobile scale: a fixed 390px canvas —
+   the smallest phone size, authored once. It never stretches or reflows to fill a
+   wider window; like the desktop canvas it just sits in symmetric margins. On
+   screens NARROWER than 390px the whole canvas zooms down uniformly to fit (ratio
+   set on --mobile-zoom by <MobileScale>), so the mobile site only ever gets
+   smaller as a whole — it never squeezes, re-stacks, or enlarges. */
+@media (max-width: 1151px) {
+  body {
+    width: 390px;
+    min-width: 390px;
+    max-width: 390px;
+    margin-inline: auto;
+    zoom: var(--mobile-zoom, 1);
+  }
+}
+
+/* Two scales, one snap point. Collapse every Tailwind breakpoint onto 1152px so
+   sm:/md:/lg:/xl:/2xl: all fire at the same boundary as the body freeze above —
+   the exact width of the desktop canvas. The result: the mobile scale holds up to
+   1152px, then everything snaps to the fixed desktop canvas at once. No
+   intermediate reflow and no horizontal scroll, and the doctrine is
+   self-enforcing because no prefix can reintroduce an in-between breakpoint. */
+@theme {
+  --breakpoint-sm: 1152px;
+  --breakpoint-md: 1152px;
+  --breakpoint-lg: 1152px;
+  --breakpoint-xl: 1152px;
+  --breakpoint-2xl: 1152px;
+}
+
+:root {
+  --radius: 0.75rem;
+
+  /* Easing — strong curves, UI motion stays under 300ms */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --background: #FFFFFF;
+  --foreground: #111111;
+  --card: #FAFAF9;
+  --card-foreground: #111111;
+  --popover: #FFFFFF;
+  --popover-foreground: #111111;
+
+  /* Monochrome accent — state/indication resolve to foreground (black in light, white in dark) */
+  --primary: #111111;
+  --primary-foreground: #FFFFFF;
+
+  --secondary: #F4F4F3;
+  --secondary-foreground: #111111;
+  --muted: #F4F4F3;
+  --muted-foreground: #787774;
+  --accent: #F4F4F3;
+  --accent-foreground: #111111;
+  --destructive: #DC2626;
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.06);
+  --ring: #111111;
+  /* Flag outline — dark grey in light mode (softer than black), a light grey
+     lifted off the dark background in dark mode. */
+  --flag-border: #52525b;
+
+  /* Per-project accent. Each project sets its own via inline style;
+     defaults to the monochrome foreground. Soft = neutral tint for backgrounds. */
+  --brand: var(--primary);
+  --brand-soft: rgba(0, 0, 0, 0.06);
+}
+
+.dark {
+  --background: #111111;
+  --foreground: #F5F5F4;
+  --card: #1A1A19;
+  --card-foreground: #F5F5F4;
+  --popover: #1A1A19;
+  --popover-foreground: #F5F5F4;
+  --primary: #F5F5F4;
+  --primary-foreground: #111111;
+  --secondary: #252524;
+  --secondary-foreground: #F5F5F4;
+  --muted: #252524;
+  --muted-foreground: #8A8A87;
+  --accent: #252524;
+  --accent-foreground: #F5F5F4;
+  --destructive: #EF4444;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.06);
+  --ring: #F5F5F4;
+  --flag-border: #a1a1aa;
+  --brand-soft: rgba(255, 255, 255, 0.08);
+}
+
+/* Opt-out shield: elements with this class keep the theme's DEFAULT palette,
+   ignoring the site-wide custom background colour (they re-declare the vars, so
+   the :root override no longer cascades into their subtree). */
+.mh-base {
+  --background: #FFFFFF;
+  --foreground: #111111;
+  --card: #FAFAF9;
+  --card-foreground: #111111;
+  --popover: #FFFFFF;
+  --popover-foreground: #111111;
+  --primary: #111111;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F4F4F3;
+  --secondary-foreground: #111111;
+  --muted: #F4F4F3;
+  --muted-foreground: #787774;
+  --accent: #F4F4F3;
+  --accent-foreground: #111111;
+  --border: rgba(0, 0, 0, 0.08);
+  --input: rgba(0, 0, 0, 0.06);
+  --ring: #111111;
+  /* also immune to the font switcher: fixed Inter, no advance-width rescale */
+  font-family: var(--font-inter-locked), system-ui, sans-serif;
+  font-size-adjust: none;
+  letter-spacing: normal;
+}
+.dark .mh-base {
+  --background: #111111;
+  --foreground: #F5F5F4;
+  --card: #1A1A19;
+  --card-foreground: #F5F5F4;
+  --popover: #1A1A19;
+  --popover-foreground: #F5F5F4;
+  --primary: #F5F5F4;
+  --primary-foreground: #111111;
+  --secondary: #252524;
+  --secondary-foreground: #F5F5F4;
+  --muted: #252524;
+  --muted-foreground: #8A8A87;
+  --accent: #252524;
+  --accent-foreground: #F5F5F4;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.06);
+  --ring: #F5F5F4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-soft: var(--brand-soft);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-geist-mono);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 6px);
+}
+
+* { border-color: var(--border); }
+
+/* Holographic prism underline (Design wordmark): a thin bar whose rainbow gradient
+   drifts through the spectrum. The gradient's first and last stops match, so a
+   200% background-position shift loops seamlessly. */
+@keyframes prism-shift { to { background-position: 200% 0; } }
+
+body {
+  /* Transparent so the fixed ambient-effects canvas (-z-10) shows through behind
+     the content. <html> still carries var(--background), so with no effect on the
+     page looks identical — html paints the same colour the body used to. */
+  background: transparent;
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Mono faces need tighter tracking to stay layout-compatible at an Inter-like
+   optical size. Apply that tracking as a layout lock, not merely inherited body
+   style, so Tailwind `tracking-*` utilities on headings/labels cannot reintroduce
+   subtle wrapping and section drift. */
+body.mh-font-tracked :where(#mh-page, #mh-page *) {
+  letter-spacing: var(--mh-font-tracking) !important;
+}
+body.mh-font-tracked :where(.mh-base, .mh-base *, [class*="font-[family-name"], [class*="__className"], .font-mono, code, pre, kbd, samp) {
+  letter-spacing: normal !important;
+}
+
+/* The font switcher normalises body text to Inter's advance width via
+   font-size-adjust and, for the mono faces, compensating tracking on <body>.
+   Anything that opts into a specific display face — the custom wordmarks (Nunito)
+   and monospaced code — must opt out so a font change never rescales it.
+
+   There are exactly two ways to wear a display face here, and both must opt out:
+     font-[family-name:var(--font-x)]  — the CSS-variable way
+     next/font's hashed class          — e.g. press_start_2p_…-module__…__className
+   The hashed classes always carry "__className" (turbopack: bare; webpack:
+   __className_<hash>), so match on that. Only elements that deliberately wear a
+   face get one — layout.tsx applies the switchable site fonts via .variable, not
+   .className — so this can never catch ordinary body text. */
+[class*="font-[family-name"],
+[class*="__className"],
+.font-mono,
+code, pre, kbd, samp {
+  font-size-adjust: none;
+  letter-spacing: normal;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* Scrollbars are hidden site-wide — the vertical bar on the right and any
+   horizontal bar along the bottom (page and inner scroll regions alike). Scrolling
+   itself stays fully functional: wheel, trackpad, touch, drag, and keys all work,
+   only the scrollbar chrome is never drawn. */
+* { scrollbar-width: none; -ms-overflow-style: none; }
+::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+/* ── Loading screen ─────────────────────────────────────────────────────────
+   A cinematic curtain covers the site on first load: "Welcome to my website"
+   rises in word-by-word, blurs away to the Inter "Samuel" wordmark, which glitches
+   through the site's other faces (fast → slow, like a real load) and settles, then
+   the whole sheet lifts up and drops the visitor in. See <LoadingScreen>. */
+@keyframes loader-word {
+  from { opacity: 0; transform: translateY(26px); filter: blur(8px); }
+  to   { opacity: 1; transform: none; filter: blur(0); }
+}
+.loader-word { animation: loader-word 0.6s var(--ease-out) both; }
+@media (prefers-reduced-motion: reduce) {
+  .loader-word { animation: none; }
+}
+
+/* Loader bar — a faint monochrome track behind the flat foreground fill (see
+   barFillStyle in loading-screen.tsx). `.loader-bar-settle` fires once, right as the
+   fill locks to 100% at the same instant the mark commits to its clean settle — a
+   brief glow/brighten "confident finish", not part of the fill's own steady ramp. */
+.loader-track { background: color-mix(in srgb, var(--foreground) 14%, transparent); }
+@keyframes loader-bar-settle {
+  0% { box-shadow: 0 0 0 0 transparent; filter: brightness(1); }
+  35% { box-shadow: 0 0 7px 0 color-mix(in srgb, var(--foreground) 55%, transparent); filter: brightness(1.25); }
+  100% { box-shadow: 0 0 0 0 transparent; filter: brightness(1); }
+}
+.loader-bar-settle { animation: loader-bar-settle 280ms var(--ease-out) both; }
+
+/* "my name is" types out rather than fading in whole — a blinking caret rides the
+   last typed character (see NAME_TEXT/nameChars in loading-screen.tsx). */
+@keyframes loader-caret-blink { 0%, 45% { opacity: 1; } 46%, 100% { opacity: 0; } }
+.loader-caret { animation: loader-caret-blink 0.9s steps(1) infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .loader-caret { animation: none; }
+}
+
+/* Ambient loader geometry — a few quiet monochrome shapes filling the curtain's
+   empty space (a ring, a square, a triangle), pure CSS so they're free (no JS
+   timers) and never touch the deterministic clock driving the mark/bar. Colour
+   stays a wordmark-only moment — these are always a faint foreground tint, same
+   opacity family as .loader-track. Frozen under reduced motion. */
+@keyframes loader-shape-spin { from { rotate: 0deg; } to { rotate: 360deg; } }
+@keyframes loader-shape-drift { 0%, 100% { translate: 0 0; } 50% { translate: 5px -9px; } }
+@keyframes loader-shape-breathe { 0%, 100% { scale: 1; opacity: 0.12; } 50% { scale: 1.18; opacity: 0.2; } }
+.loader-shape-ring { animation: loader-shape-spin 22s linear infinite; }
+.loader-shape-square { animation: loader-shape-spin 30s linear infinite reverse, loader-shape-drift 8s var(--ease-out) infinite; }
+.loader-shape-tri { animation: loader-shape-breathe 6s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .loader-shape-ring, .loader-shape-square, .loader-shape-tri { animation: none; }
+}
+
+/* Prose — the guide and case studies are reading surfaces */
+.prose-mad {
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--foreground);
+}
+.prose-mad p { margin-bottom: 1.25em; }
+.prose-mad h2 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 2.25em 0 0.75em;
+}
+.prose-mad h3 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin: 1.75em 0 0.5em;
+}
+.prose-mad ul, .prose-mad ol { margin: 0 0 1.25em; padding-left: 1.25em; }
+.prose-mad ul { list-style: disc; }
+.prose-mad ol { list-style: decimal; }
+.prose-mad li { margin-bottom: 0.4em; }
+.prose-mad strong { font-weight: 600; }
+.prose-mad a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--brand) 35%, transparent);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 150ms var(--ease-out);
+}
+.prose-mad a:hover { text-decoration-color: var(--brand); }
+.prose-mad code {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.8125rem;
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: 0.1em 0.35em;
+}
+.prose-mad pre {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1em 1.25em;
+  overflow-x: auto;
+  margin-bottom: 1.25em;
+}
+.prose-mad pre code { background: none; border: none; padding: 0; }
+.prose-mad blockquote {
+  border-left: 2px solid var(--brand);
+  padding-left: 1em;
+  color: var(--muted-foreground);
+  margin-bottom: 1.25em;
+}
+
+/* Push button — 3D press, one of the house originals */
+.push-btn {
+  --btn-rgb: 24, 24, 27;
+  --btn-shadow-rgb: 0, 0, 0;
+  width: 44px;
+  height: 44px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  outline: 8px solid rgba(var(--btn-rgb), 0.18);
+  border-radius: 100%;
+  position: relative;
+  transition: outline 0.3s;
+  flex-shrink: 0;
+}
+.push-btn .push-btn-back {
+  background: rgb(var(--btn-shadow-rgb));
+  border-radius: 100%;
+  position: absolute;
+  inset: 0;
+}
+.push-btn .push-btn-front {
+  background: linear-gradient(0deg, rgba(var(--btn-rgb), 0.75) 20%, rgb(var(--btn-rgb)) 50%);
+  box-shadow: 0 0.5em 1em -0.2em rgba(var(--btn-shadow-rgb), 0.5);
+  border-radius: 100%;
+  position: absolute;
+  border: 1px solid rgb(var(--btn-shadow-rgb));
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  transform: translateY(-15%);
+  transition: transform 0.15s var(--ease-out), box-shadow 0.15s var(--ease-out);
+}
+.push-btn:active .push-btn-front {
+  transform: translateY(0%);
+  box-shadow: none;
+}
+.push-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.dark .push-btn {
+  --btn-rgb: 63, 63, 70;
+  --btn-shadow-rgb: 0, 0, 0;
+}
+
+/* Menu social buttons — brand accent blooms on hover; the row is monochrome at rest.
+   The tint reuses currentColor, so each button's soft background matches its own accent.
+   Gated behind (hover: hover) so a tap on touch devices doesn't leave the bloom stuck. */
+@media (hover: hover) {
+  .social-link:hover {
+    background: color-mix(in srgb, currentColor 8%, transparent);
+  }
+  .social-github:hover,
+  .social-x:hover {
+    color: var(--foreground);
+  }
+  .social-youtube:hover {
+    color: #FF0033;
+  }
+  .social-discord:hover {
+    color: #5865F2;
+  }
+  .social-instagram:hover {
+    color: #D62976;
+  }
+  .social-instagram:hover svg {
+    fill: url(#ig-gradient);
+  }
+}
+
+/* Reading-gif social dock — each frosted-glass chip carries a clean brand-coloured
+   holographic glow border AT REST: Instagram = the true multi-stop gradient border,
+   YouTube red, LinkedIn blue, GitHub white, coffee yellow — colour on the 1.75px
+   border only, no glow, over the frosted glass. Hover escalates into the full brand
+   fill (still no glow). Fixed footprint — press-scale is inline in Tailwind so the row
+   never reflows. Hover fills gated behind (hover:hover) so a tap never leaves one stuck. */
+.rs-chip {
+  position: relative;
+  border: 2px solid transparent;
+}
+/* Rest = the brand colour on the border only, no coloured glow. The single soft
+   dark drop-shadow is grounding (separates the chip from the busy gif), not a glow. */
+.rs-youtube {
+  border-color: rgba(255, 0, 0, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+.rs-linkedin {
+  border-color: rgba(10, 102, 194, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+.rs-github {
+  border-color: rgba(255, 255, 255, 0.85);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+.rs-coffee {
+  border-color: rgba(255, 221, 0, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+/* Instagram wears the same frosted glass as the others (the chip's bg-white/10 shows
+   through), with the multi-stop gradient painted as a real BORDER RING via a masked
+   ::before — not a fill. The old two-layer padding-box/border-box trick let the full
+   border-box gradient bleed through the semi-transparent padding layer, so the whole
+   chip read as a solid gradient tile instead of an outline. The mask (border-box minus
+   content-box) leaves only the 2px ring, and unlike border-image it respects the
+   chip's border radius. */
+.rs-instagram {
+  /* No transparent border here: it would inset the ::before to the padding box,
+     shrinking the gradient ring inside the other chips' edge-flush borders. With
+     border:0 the ::before spans the full box and the 2px ring sits at the edge. */
+  border: 0;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+}
+.rs-instagram::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(45deg, #f56040 0%, #fa7e1e 24%, #d62976 55%, #962fbf 78%, #4f5bd5 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+@media (hover: hover) {
+  .rs-chip:hover {
+    color: #fff;
+  }
+  /* Hover blooms to the full brand fill — still no coloured glow, just the neutral
+     grounding shadow. */
+  .rs-instagram:hover {
+    background: linear-gradient(45deg, #f56040 0%, #fa7e1e 24%, #d62976 55%, #962fbf 78%, #4f5bd5 100%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  .rs-youtube:hover {
+    background: #FF0000;
+    border-color: rgba(255, 0, 0, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  .rs-linkedin:hover {
+    background: #0A66C2;
+    border-color: rgba(10, 102, 194, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  .rs-github:hover {
+    background: #ffffff;
+    color: #18181b;
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  .rs-coffee:hover {
+    background: #FFDD00;
+    color: #18181b;
+    border-color: rgba(255, 221, 0, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Light mode: the gradient's pale-yellow corner (#FEDA75) barely clears 1.4:1 on the
+   white panel, so swap it for an authentic-IG orange-red (~3.2:1). Dark keeps the vivid yellow. */
+#ig-gradient stop:first-child {
+  stop-color: #F56040;
+}
+.dark #ig-gradient stop:first-child {
+  stop-color: #FEDA75;
+}
+
+/* Location hover card — Seattle, another house original */
+.lc-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.lc-ref {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: -20px;
+  pointer-events: none;
+  z-index: 50;
+}
+.lc-card {
+  transition: transform 0.3s cubic-bezier(0.74, -0.03, 0.05, 1.24);
+  width: 160px;
+  height: 95px;
+  will-change: transform;
+  transform-origin: 16% 100%;
+  /* Rest at 0.93, not 0 — nothing in the real world appears from nothing; a
+     deflated balloon still has a shape. Opacity carries the fade. */
+  transform: scale(0.93);
+  opacity: 0;
+  filter: blur(8px);
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 0 0 2px #d4d4d4, 1px 4px 5px 4px #ededed54;
+  padding: 2px;
+  animation-duration: 0.3s;
+  animation-delay: 0.1s;
+  animation-fill-mode: both;
+  overflow: hidden;
+}
+.lc-wrapper:has(.lc-trigger:hover) > .lc-ref > .lc-card {
+  transform: scale(1);
+  opacity: 1;
+  animation-name: lc-fadeIn;
+  pointer-events: all;
+}
+.lc-inner-card {
+  position: relative;
+  border-radius: 16px;
+  height: 100%;
+  width: 100%;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  background: #f4f4f3;
+  overflow: hidden;
+}
+.lc-bg-map {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background-color: #e5e5e4;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px),
+    linear-gradient(135deg, #d4d4d3 38%, transparent 38%);
+  background-size: 10px 10px, 10px 10px, 100% 100%;
+  background-repeat: repeat, repeat, no-repeat;
+}
+.lc-clouds {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  font-size: 10px;
+}
+.lc-cloud {
+  position: absolute;
+  border-radius: 50%;
+  animation-name: lc-movingClouds;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+.lc-clouds .lc-cloud:nth-child(1) {
+  animation-duration: 45s;
+  height: 1em;
+  width: 1.4em;
+  top: 3.5em;
+  left: 50%;
+  background: linear-gradient(to top right, #ffffffae, #ffffffae);
+  filter: blur(0.125em) drop-shadow(0.438em 0.188em #ffffffae) drop-shadow(-0.625em 0.313em #ffffffae);
+  transition: 0.4s;
+}
+.lc-clouds .lc-cloud:nth-child(2) {
+  animation-duration: 30s;
+  top: 0.325em;
+  right: -1em;
+  width: 4.075em;
+  height: 1.575em;
+  background: #ebebebdb;
+  filter: blur(0.425em) drop-shadow(-0.313em 0.812em #e0dfdfae) drop-shadow(-1.625em 0.812em #bbbbbbae) drop-shadow(-1em 0.063em #cfcfcfae);
+}
+.lc-clouds .lc-cloud:nth-child(3) {
+  animation-duration: 60s;
+  top: 2.45em;
+  right: 4.938em;
+  width: 1.075em;
+  height: 0.575em;
+  background: #ffffff;
+  filter: blur(0.125em) drop-shadow(0.438em 0.188em #ffffffae) drop-shadow(-0.625em 0.313em #ffffffae);
+  transition: 0.8s;
+}
+.lc-clouds .lc-cloud:nth-child(4) {
+  animation-duration: 40s;
+  top: 4.45em;
+  right: 4.938em;
+  width: 1.075em;
+  height: 0.375em;
+  background: #ffffff;
+  filter: blur(0.125em) drop-shadow(0.438em 0.188em #ffffffae) drop-shadow(-0.625em 0.313em #ffffffae);
+}
+.lc-location {
+  position: absolute;
+  background-color: #111111;
+  top: 24%;
+  left: 60%;
+  z-index: 10;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px 7px rgba(0, 0, 0, 0.3);
+  border: 3px solid white;
+  animation: lc-pulse 3s infinite;
+}
+.lc-elements {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.lc-details {
+  flex: 1 1 0;
+  background: #f4f4f3;
+  filter: blur(6px);
+  margin-bottom: -10%;
+  margin-top: -12%;
+}
+.lc-description {
+  padding: 10px 12px;
+}
+.lc-main-title {
+  font-size: 0.85rem;
+  color: #111111;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.lc-second-title {
+  font-size: 0.72rem;
+  color: #787774;
+  font-weight: 500;
+}
+@keyframes lc-pulse {
+  0%   { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0,0,0,0.6), 0 0 8px 5px rgba(0,0,0,0.2); }
+  70%  { transform: scale(1);    box-shadow: 0 0 0 8px rgba(0,0,0,0), 0 0 8px 5px rgba(0,0,0,0.2); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0,0,0,0),   0 0 8px 5px rgba(0,0,0,0.2); }
+}
+@keyframes lc-fadeIn {
+  0%   { filter: brightness(1) blur(8px);  }
+  10%  { filter: brightness(1) blur(14px); }
+  100% { filter: brightness(1) blur(0px);  }
+}
+@keyframes lc-movingClouds {
+  from { transform: translateX(-100px); }
+  to   { transform: translateX(100px);  }
+}
+.dark .lc-card {
+  background: var(--card);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25), 1px 4px 5px 4px rgba(0,0,0,0.3);
+}
+.dark .lc-inner-card {
+  background: #1a1a19;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.dark .lc-bg-map {
+  background-color: #111111;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(135deg, #252524 38%, transparent 38%);
+}
+.dark .lc-details {
+  background: #1a1a19;
+}
+.dark .lc-main-title {
+  color: #F5F5F4;
+}
+.dark .lc-second-title {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lc-cloud, .lc-location { animation: none; }
+  .push-btn .push-btn-front { transition: none; }
+}
+
+/* --- Brand-world motifs (work index) --- */
+@keyframes mh-steam {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-3px); opacity: 0.85; }
+}
+@keyframes mh-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+@keyframes mh-pulse-dot {
+  0%, 100% { opacity: 0.9; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+@keyframes mh-glass-sheen {
+  from { transform: translateX(-150%) skewX(-18deg); }
+  to { transform: translateX(350%) skewX(-18deg); }
+}
+
+/* Agent roster marquee — track holds the roster twice, so -50% loops seamlessly.
+   Eased drift (not dead-linear) gives the parade a gentler, hand-wound feel. */
+@keyframes agents-marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Conveyor belt: diagonal segment slats scroll left. The strip tiles every 16px,
+   so translating one tile-width loops seamlessly. Play-state is driven inline so
+   it can freeze on hover (a plain-CSS shorthand here would reset it to running). */
+@keyframes belt-slats { to { transform: translateX(-16px); } }
+.belt-slats {
+  animation-name: belt-slats;
+  animation-duration: 0.55s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+/* Belt-speed slider: bare (no panel), so it carries its own thin track + round thumb
+   with enough contrast to read on the white/dark belt face. */
+.belt-speed {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+.belt-speed::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 4px;
+  background: color-mix(in srgb, currentColor 22%, transparent);
+}
+.belt-speed::-moz-range-track {
+  height: 10px;
+  border-radius: 4px;
+  background: color-mix(in srgb, currentColor 22%, transparent);
+}
+.belt-speed::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: 1px;
+  height: 8px;
+  width: 8px;
+  border-radius: 3px;
+  background: currentColor;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.belt-speed::-moz-range-thumb {
+  height: 8px;
+  width: 8px;
+  border: none;
+  border-radius: 3px;
+  background: currentColor;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mh-steam, .mh-blink, .mh-pulse-dot, .mh-glass-sheen { animation: none !important; }
+  .agents-track { animation: none !important; }
+  .belt-slats { animation: none !important; }
+}
+
+::view-transition-old(root), ::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+[data-magicui-theme-vt="active"]::view-transition-new(root) {
+  clip-path: var(--magicui-theme-vt-clip-from);
+  animation: none;
+}
+
+[data-magicui-theme-vt="active"]::view-transition-old(root) {
+  animation: none;
+}
+
+/* Pulsating Button keyframes — shipped with the registry component
+   (@/components/ui/pulsating-button). Uniquely named so they never collide
+   with Tailwind's built-in animate-pulse. */
+@keyframes samuel-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--pulse-color, var(--samuel-bg, currentColor)); }
+  50% { box-shadow: 0 0 0 var(--distance, 8px) transparent; }
+}
+@keyframes samuel-pulse-ripple {
+  0% { box-shadow: 0 0 0 0 var(--pulse-color, var(--samuel-bg, currentColor)); }
+  100% { box-shadow: 0 0 0 var(--distance, 8px) transparent; }
+}
+
+/* toolbar build bump */

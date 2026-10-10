@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "reveal",
+  "type": "registry:ui",
+  "title": "Reveal",
+  "description": "A scroll and mount triggered fade-up wrapper with a staggered index delay and reduced-motion support.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/reveal.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/reveal.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\n\nconst ease = [0.23, 1, 0.32, 1] as const;\n\ntype RevealProps = {\n  children: React.ReactNode;\n  /** Stagger index — 50ms per step. */\n  index?: number;\n  className?: string;\n};\n\n/**\n * The one entrance used everywhere: a short fade-up, once, on scroll.\n * Decorative motion stays consistent so the content does the talking.\n */\nexport function Reveal({ children, index = 0, className }: RevealProps) {\n  const reduceMotion = useReducedMotion();\n\n  return (\n    <motion.div\n      initial={{ opacity: 0, y: reduceMotion ? 0 : 10 }}\n      whileInView={{ opacity: 1, y: 0 }}\n      viewport={{ once: true, margin: \"-40px\" }}\n      transition={{ duration: 0.5, delay: index * 0.05, ease }}\n      className={className}\n    >\n      {children}\n    </motion.div>\n  );\n}\n"
+    }
+  ]
+}

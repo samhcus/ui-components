@@ -1,0 +1,65 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "push-button",
+  "type": "registry:ui",
+  "title": "Push Button",
+  "description": "A tactile round push button. The face sits raised on a hard shadow and sinks flush on press, like a real physical key. Ships its own styles.",
+  "author": "Samuel (https://samhc.us)",
+  "css": {
+    ".push-btn": {
+      "--btn-rgb": "24, 24, 27",
+      "--btn-shadow-rgb": "0, 0, 0",
+      "width": "44px",
+      "height": "44px",
+      "border": "none",
+      "cursor": "pointer",
+      "user-select": "none",
+      "touch-action": "manipulation",
+      "outline": "8px solid rgba(var(--btn-rgb), 0.18)",
+      "border-radius": "100%",
+      "position": "relative",
+      "transition": "outline 0.3s",
+      "flex-shrink": "0"
+    },
+    ".push-btn .push-btn-back": {
+      "background": "rgb(var(--btn-shadow-rgb))",
+      "border-radius": "100%",
+      "position": "absolute",
+      "inset": "0"
+    },
+    ".push-btn .push-btn-front": {
+      "background": "linear-gradient(0deg, rgba(var(--btn-rgb), 0.75) 20%, rgb(var(--btn-rgb)) 50%)",
+      "box-shadow": "0 0.5em 1em -0.2em rgba(var(--btn-shadow-rgb), 0.5)",
+      "border-radius": "100%",
+      "position": "absolute",
+      "border": "1px solid rgb(var(--btn-shadow-rgb))",
+      "inset": "0",
+      "display": "flex",
+      "justify-content": "center",
+      "align-items": "center",
+      "color": "#fff",
+      "transform": "translateY(-15%)",
+      "transition": "transform 0.15s ease-out, box-shadow 0.15s ease-out"
+    },
+    ".push-btn:active .push-btn-front": {
+      "transform": "translateY(0%)",
+      "box-shadow": "none"
+    },
+    ".push-btn:disabled": {
+      "cursor": "not-allowed",
+      "opacity": "0.6"
+    },
+    ".dark .push-btn": {
+      "--btn-rgb": "63, 63, 70",
+      "--btn-shadow-rgb": "0, 0, 0"
+    }
+  },
+  "files": [
+    {
+      "path": "registry/samuel/push-button.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/push-button.tsx",
+      "content": "import * as React from \"react\";\n\ninterface PushButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {\n  children: React.ReactNode;\n}\n\nexport function PushButton({ children, className, ...props }: PushButtonProps) {\n  return (\n    <button className={`push-btn${className ? ` ${className}` : \"\"}`} {...props}>\n      <span className=\"push-btn-back\" />\n      <span className=\"push-btn-front\">{children}</span>\n    </button>\n  );\n}\n"
+    }
+  ]
+}

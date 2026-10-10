@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "samuel-ui-wordmark",
+  "type": "registry:ui",
+  "title": "UI Components Wordmark",
+  "description": "A cohesive Nunito lockup with a small blue UI chip, em-relative so it scales from panel title to page hero.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/samuel-ui-wordmark.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/samuel-ui-wordmark.tsx",
+      "content": "import { cn } from \"@/lib/utils\";\n\n// Single accent for the \"UI\" chip — the sandbox shovel blue, already part of the\n// house brand palette, so this mark sits alongside the other wordmarks.\nconst UI_ACCENT = \"#3B82F6\";\n\n/**\n * Wordmark for Samuel's UI Components — the identity of the free component library.\n *\n * One cohesive lockup in rounded, friendly Nunito (shared with the other brand\n * marks), built as a tonal three-step so it reads as a single logo: \"Samuel's\" in\n * full foreground, a small blue \"UI\" chip as the library's mark, then \"Components\"\n * dropped to muted-foreground. Everything is em-relative, so it looks right both\n * small (a ~20px bento panel title) and large (a ~44px page hero). The passed\n * `className` sets the font-size. Monochrome-friendly with one restrained accent;\n * works in light and dark mode.\n */\nexport function SamuelUIWordmark({\n  className,\n  showOwner = true,\n}: {\n  className?: string;\n  /** Set false to drop the \"Samuel's\" owner name and show just \"UI Components\". */\n  showOwner?: boolean;\n}) {\n  return (\n    <span\n      className={cn(\n        \"inline-flex select-none items-center gap-[0.32em] font-[family-name:var(--font-nunito)] font-extrabold leading-none tracking-tight\",\n        className\n      )}\n      aria-label={showOwner ? \"Samuel's UI Components\" : \"UI Components\"}\n    >\n      {showOwner && <span className=\"text-foreground\">Samuel&rsquo;s</span>}\n      <span\n        className=\"inline-flex items-center rounded-[0.32em] font-bold text-white\"\n        style={{\n          background: UI_ACCENT,\n          fontSize: \"0.62em\",\n          padding: \"0.16em 0.36em\",\n          letterSpacing: \"0.01em\",\n        }}\n      >\n        UI\n      </span>\n      <span className=\"text-muted-foreground\">Components</span>\n    </span>\n  );\n}\n"
+    }
+  ]
+}

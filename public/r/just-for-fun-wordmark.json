@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "just-for-fun-wordmark",
+  "type": "registry:ui",
+  "title": "Just For Fun Wordmark",
+  "description": "A friendly rounded lockup with an italic last word underlined by a hand-drawn squiggle that scales with the type. Self-contained via next/font.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/just-for-fun-wordmark.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/just-for-fun-wordmark.tsx",
+      "content": "import { Nunito } from \"next/font/google\";\nimport { cn } from \"@/lib/utils\";\n\n// Rounded, friendly Nunito — pulled via next/font so the mark is self-contained.\nconst nunito = Nunito({ subsets: [\"latin\"], weight: [\"800\"] });\n\n/**\n * JustForFunWordmark — a rounded, friendly lockup with an italic, hand-drawn\n * underline squiggle on the last word. The squiggle scales with the type\n * (em-based), so it reads at nav size and as a section heading alike. Monochrome\n * with a single warm accent for personality. Font-size comes from `className`.\n */\nexport function JustForFunWordmark({\n  lead = \"Just for\",\n  accent = \"fun\",\n  color = \"#F59E0B\",\n  className,\n}: {\n  lead?: string;\n  accent?: string;\n  color?: string;\n  className?: string;\n}) {\n  return (\n    <span\n      className={cn(\n        nunito.className,\n        \"inline-flex select-none items-baseline gap-[0.28em] font-extrabold tracking-tight text-foreground\",\n        className,\n      )}\n      aria-label={`${lead} ${accent}`}\n    >\n      <span>{lead}</span>\n      <span className=\"relative italic\">\n        {accent}\n        <svg\n          aria-hidden\n          viewBox=\"0 0 40 8\"\n          preserveAspectRatio=\"none\"\n          className=\"absolute -bottom-[0.12em] left-0 h-[0.28em] w-full overflow-visible\"\n        >\n          <path\n            d=\"M1 5 C 8 2, 14 7, 20 4 S 32 2, 39 5\"\n            fill=\"none\"\n            stroke={color}\n            strokeWidth=\"2\"\n            strokeLinecap=\"round\"\n          />\n        </svg>\n      </span>\n    </span>\n  );\n}\n\nexport default JustForFunWordmark;\n"
+    }
+  ]
+}

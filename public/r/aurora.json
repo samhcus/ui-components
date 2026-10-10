@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "aurora",
+  "type": "registry:ui",
+  "title": "Aurora",
+  "description": "Soft, slow-drifting ribbons of colour that glow behind content like the northern lights.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/aurora.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/aurora.tsx",
+      "content": "\"use client\";\n\nimport { motion, useReducedMotion } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Aurora — soft, slow-drifting ribbons of colour that glow behind content like\n * the northern lights. Drop it into any `relative` box as a layer: a few large\n * blurred blobs screen-blend and wander on their own timers, so it never loops\n * visibly. GPU-cheap (transform + opacity only). Holds still, still glowing,\n * under prefers-reduced-motion.\n */\nexport function Aurora({\n  colors = [\"#7c6cff\", \"#22d3ee\", \"#f472b6\"],\n  speed = 1,\n  blur = 40,\n  className,\n}: {\n  /** Two-plus colours for the ribbons. */\n  colors?: string[];\n  /** Drift-speed multiplier. */\n  speed?: number;\n  /** Blur radius in px — higher is dreamier. */\n  blur?: number;\n  className?: string;\n}) {\n  const reduce = useReducedMotion();\n  const spots = [\n    { left: \"8%\", top: \"6%\", x: [\"-12%\", \"18%\", \"-12%\"], y: [\"-8%\", \"16%\", \"-8%\"] },\n    { left: \"44%\", top: \"28%\", x: [\"14%\", \"-16%\", \"14%\"], y: [\"10%\", \"-12%\", \"10%\"] },\n    { left: \"62%\", top: \"10%\", x: [\"-8%\", \"12%\", \"-8%\"], y: [\"-6%\", \"18%\", \"-6%\"] },\n    { left: \"24%\", top: \"40%\", x: [\"10%\", \"-14%\", \"10%\"], y: [\"8%\", \"-10%\", \"8%\"] },\n  ];\n\n  return (\n    <div aria-hidden className={cn(\"pointer-events-none absolute inset-0 overflow-hidden\", className)}>\n      {colors.map((c, i) => {\n        const s = spots[i % spots.length];\n        return (\n          <motion.div\n            key={i}\n            className=\"absolute rounded-full\"\n            style={{\n              left: s.left,\n              top: s.top,\n              width: \"72%\",\n              height: \"72%\",\n              background: c,\n              opacity: 0.5,\n              filter: `blur(${blur}px)`,\n              mixBlendMode: \"screen\",\n            }}\n            animate={reduce ? undefined : { x: s.x, y: s.y, scale: [1, 1.25, 1] }}\n            transition={{ duration: (11 + i * 2.5) / speed, repeat: Infinity, ease: \"easeInOut\" }}\n          />\n        );\n      })}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

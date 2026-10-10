@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "spinning-globe",
+  "type": "registry:ui",
+  "title": "Spinning Globe",
+  "description": "A clean line globe whose meridians scroll inside a circular clip, so it reads as rotating on its axis. Spins on hover or on a prop; stills under reduced motion.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/spinning-globe.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/spinning-globe.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { useId, useState } from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * SpinningGlobe — a clean line globe whose meridians scroll inside a circular\n * clip, so the sphere reads as rotating on its axis rather than tumbling. Spins\n * on hover by default; pass `spinning` to drive the state yourself. Stills under\n * reduced motion. Inherits color from the parent via currentColor.\n */\nexport function SpinningGlobe({\n  size = 20,\n  spinning,\n  className,\n}: {\n  /** Pixel size of the square icon. */\n  size?: number;\n  /** Force the spin state. Omit to spin on hover. */\n  spinning?: boolean;\n  className?: string;\n}) {\n  const clipId = useId();\n  const reduce = useReducedMotion();\n  const [hover, setHover] = useState(false);\n  const spin = (spinning ?? hover) && !reduce;\n\n  return (\n    <svg\n      width={size}\n      height={size}\n      viewBox=\"0 0 24 24\"\n      fill=\"none\"\n      aria-hidden\n      className={cn(\"text-foreground\", className)}\n      onMouseEnter={() => setHover(true)}\n      onMouseLeave={() => setHover(false)}\n    >\n      <defs>\n        <clipPath id={clipId}>\n          <circle cx=\"12\" cy=\"12\" r=\"9\" />\n        </clipPath>\n      </defs>\n      <circle cx=\"12\" cy=\"12\" r=\"9\" stroke=\"currentColor\" strokeWidth=\"1.7\" />\n      <g\n        clipPath={`url(#${clipId})`}\n        stroke=\"currentColor\"\n        strokeWidth=\"1.05\"\n        opacity=\"0.9\"\n      >\n        <line x1=\"3\" y1=\"12\" x2=\"21\" y2=\"12\" />\n        <line x1=\"4.6\" y1=\"7.5\" x2=\"19.4\" y2=\"7.5\" />\n        <line x1=\"4.6\" y1=\"16.5\" x2=\"19.4\" y2=\"16.5\" />\n        <motion.g\n          animate={spin ? { x: [0, -8] } : { x: 0 }}\n          transition={\n            spin\n              ? { duration: 2.2, repeat: Infinity, ease: \"linear\" }\n              : { duration: 0.4, ease: \"easeOut\" }\n          }\n        >\n          {[-4, 4, 12, 20, 28].map((cx) => (\n            <ellipse key={cx} cx={cx} cy=\"12\" rx=\"4\" ry=\"9\" />\n          ))}\n        </motion.g>\n      </g>\n    </svg>\n  );\n}\n\nexport default SpinningGlobe;\n"
+    }
+  ]
+}

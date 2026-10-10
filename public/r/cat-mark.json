@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "cat-mark",
+  "type": "registry:ui",
+  "title": "Cat Mark",
+  "description": "A side-profile cat silhouette with ears, four legs, and a curling tail, filled in the current text color.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/cat-mark.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/cat-mark.tsx",
+      "content": "/**\n * A side-profile cat body (not a face): head with two ears, a rounded body, four\n * legs, and an upright curling tail. Fills with currentColor. Used static as the\n * toolbar's cat icon and animated (legs + tail) inside the CatCursor.\n */\nexport function CatMark({ className }: { className?: string }) {\n  return (\n    <svg viewBox=\"0 0 30 24\" fill=\"currentColor\" className={className}>\n      {/* tail — sweeps up from the back */}\n      <path\n        className=\"cat-tail\"\n        d=\"M6.5 15 Q1.5 13.5 3 6.5\"\n        fill=\"none\"\n        stroke=\"currentColor\"\n        strokeWidth=\"2.4\"\n        strokeLinecap=\"round\"\n      />\n      {/* back legs */}\n      <rect className=\"leg-b\" x=\"7.4\" y=\"15.5\" width=\"2.2\" height=\"7\" rx=\"1.1\" />\n      <rect className=\"leg-a\" x=\"10.3\" y=\"15.5\" width=\"2.2\" height=\"7\" rx=\"1.1\" />\n      {/* front legs */}\n      <rect className=\"leg-a\" x=\"18.1\" y=\"15.5\" width=\"2.2\" height=\"7\" rx=\"1.1\" />\n      <rect className=\"leg-b\" x=\"21\" y=\"15.5\" width=\"2.2\" height=\"7\" rx=\"1.1\" />\n      {/* body + head (bobs while running) */}\n      <g className=\"cat-body\">\n        <path d=\"M6 14.5 C6 10.5 8.6 8.5 12.5 8.5 L18 8.5 C20.8 8.5 22.4 10 22.4 12.6 L22.4 15.6 C22.4 17.4 21 18.2 18.8 18.2 L9.4 18.2 C7.2 18.2 6 16.8 6 14.5 Z\" />\n        <circle cx=\"23\" cy=\"9\" r=\"4.7\" />\n        {/* ears */}\n        <path d=\"M19.2 6.2 L20.1 1.7 L22.5 5.2 Z\" />\n        <path d=\"M23.7 5.2 L26.1 1.7 L27 6.2 Z\" />\n        {/* eye notch (background-coloured) */}\n        <circle cx=\"24.6\" cy=\"8.6\" r=\"0.95\" fill=\"var(--background)\" />\n      </g>\n    </svg>\n  );\n}\n"
+    }
+  ]
+}

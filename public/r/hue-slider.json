@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "hue-slider",
+  "type": "registry:ui",
+  "title": "Hue Slider",
+  "description": "A range input whose track is the colour wheel, with a live swatch that glows in the picked hue.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/samuel/hue-slider.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/hue-slider.tsx",
+      "content": "\"use client\";\n\nimport { cn } from \"@/lib/utils\";\n\n/**\n * HueSlider — a range input whose track IS the colour wheel, with a live swatch\n * that glows in the picked hue. Controlled: pass a hue (0–359) and an onChange.\n * Zero dependencies, styled for WebKit and Firefox, and legible in light and\n * dark. Pair it with `hsl(${hue} …)` anywhere you want a one-thumb colour pick.\n */\nexport function HueSlider({\n  value,\n  onChange,\n  saturation = 90,\n  lightness = 55,\n  showSwatch = true,\n  className,\n  \"aria-label\": ariaLabel = \"Hue\",\n}: {\n  /** Current hue, 0–359. */\n  value: number;\n  onChange: (hue: number) => void;\n  /** Saturation/lightness used only for the swatch preview. */\n  saturation?: number;\n  lightness?: number;\n  showSwatch?: boolean;\n  className?: string;\n  \"aria-label\"?: string;\n}) {\n  const color = `hsl(${value} ${saturation}% ${lightness}%)`;\n\n  return (\n    <div className={cn(\"flex items-center gap-2\", className)}>\n      {showSwatch && (\n        <span\n          aria-hidden\n          className=\"h-4 w-4 shrink-0 rounded-[6px] ring-2 ring-black/15 dark:ring-white/40\"\n          style={{ background: color, boxShadow: `0 0 8px ${color}` }}\n        />\n      )}\n      <input\n        type=\"range\"\n        min={0}\n        max={359}\n        value={value}\n        aria-label={ariaLabel}\n        onChange={(e) => onChange(Number(e.target.value))}\n        className={cn(\n          \"h-4 w-full cursor-pointer appearance-none rounded-md bg-transparent\",\n          \"[&::-webkit-slider-runnable-track]:h-[16px] [&::-webkit-slider-runnable-track]:rounded-md [&::-webkit-slider-runnable-track]:[background:linear-gradient(to_right,#ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000)]\",\n          \"[&::-webkit-slider-thumb]:mt-[2px] [&::-webkit-slider-thumb]:h-[12px] [&::-webkit-slider-thumb]:w-[12px] [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-[5px] [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:shadow-[0_0_0_2px_rgba(0,0,0,0.25),0_1px_4px_rgba(0,0,0,0.4)]\",\n          \"[&::-moz-range-track]:h-[16px] [&::-moz-range-track]:rounded-md [&::-moz-range-track]:[background:linear-gradient(to_right,#ff0000,#ffff00,#00ff00,#00ffff,#0000ff,#ff00ff,#ff0000)]\",\n          \"[&::-moz-range-thumb]:h-[12px] [&::-moz-range-thumb]:w-[12px] [&::-moz-range-thumb]:rounded-[5px] [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-white [&::-moz-range-thumb]:bg-white\",\n        )}\n      />\n    </div>\n  );\n}\n"
+    }
+  ]
+}

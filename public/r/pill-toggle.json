@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pill-toggle",
+  "type": "registry:ui",
+  "title": "Pill Toggle",
+  "description": "A two-position rocker for light and dark mode. The active half sinks in with an inset shadow.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "next-themes",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/pill-toggle.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/pill-toggle.tsx",
+      "content": "\"use client\";\n\nimport { useEffect, useState } from \"react\";\nimport { useTheme } from \"next-themes\";\nimport { Sun, Moon } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * Pill Toggle — a two-position rocker for light/dark mode.\n * The active half sinks in with an inset shadow, like a physical switch.\n *\n * Uncontrolled (no props) drives the real site theme via next-themes. Pass\n * `checked` + `onCheckedChange` to run it as an isolated controlled switch\n * (`checked` = dark) instead — e.g. a gallery preview that must not flip the\n * whole site's theme.\n */\nexport function PillToggle({\n  checked,\n  onCheckedChange,\n}: {\n  checked?: boolean;\n  onCheckedChange?: (checked: boolean) => void;\n} = {}) {\n  const { resolvedTheme, setTheme } = useTheme();\n  const [mounted, setMounted] = useState(false);\n  const isControlled = checked !== undefined;\n\n  useEffect(() => {\n    const id = requestAnimationFrame(() => setMounted(true));\n    return () => cancelAnimationFrame(id);\n  }, []);\n\n  const isLight = isControlled ? !checked : !mounted || resolvedTheme === \"light\";\n\n  const toggle = () => {\n    if (isControlled) {\n      onCheckedChange?.(!checked);\n    } else {\n      setTheme(isLight ? \"dark\" : \"light\");\n    }\n  };\n\n  return (\n    <button\n      onClick={toggle}\n      className=\"relative flex h-[60px] w-10 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm transition-transform duration-150 active:scale-[0.96]\"\n      aria-label={isLight ? \"Switch to dark mode\" : \"Switch to light mode\"}\n    >\n      <span\n        className={cn(\n          \"flex flex-1 items-center justify-center transition-[background-color,box-shadow] duration-200\",\n          isLight\n            ? \"bg-primary/10 shadow-[inset_0_3px_6px_rgba(0,0,0,0.12)]\"\n            : \"bg-transparent\"\n        )}\n      >\n        <Sun\n          size={13}\n          strokeWidth={2.5}\n          className={isLight ? \"text-primary\" : \"text-muted-foreground/25\"}\n        />\n      </span>\n      <span className=\"h-px shrink-0 bg-border\" />\n      <span\n        className={cn(\n          \"flex flex-1 items-center justify-center transition-[background-color,box-shadow] duration-200\",\n          !isLight\n            ? \"bg-foreground/[0.08] shadow-[inset_0_3px_6px_rgba(0,0,0,0.18)]\"\n            : \"bg-transparent\"\n        )}\n      >\n        <Moon\n          size={13}\n          strokeWidth={2.5}\n          className={!isLight ? \"text-foreground\" : \"text-muted-foreground/25\"}\n        />\n      </span>\n    </button>\n  );\n}\n"
+    }
+  ]
+}

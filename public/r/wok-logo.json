@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "wok-logo",
+  "type": "registry:ui",
+  "title": "Wok Logo",
+  "description": "A minimal wok mark with rising steam lines that renders in the current text color.",
+  "author": "Samuel (https://samhc.us)",
+  "files": [
+    {
+      "path": "registry/samuel/wok-logo.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/wok-logo.tsx",
+      "content": "/**\n * Wok Specialists mark, ported from the wokspec repo (components/wok-logo.tsx).\n * Renders in currentColor so it takes the brand accent wherever it sits.\n */\nexport function WokLogo({ size = 24, className }: { size?: number; className?: string }) {\n  return (\n    <svg\n      width={size}\n      height={size}\n      viewBox=\"0 0 32 32\"\n      fill=\"none\"\n      xmlns=\"http://www.w3.org/2000/svg\"\n      className={className}\n      aria-hidden\n    >\n      <ellipse cx=\"16\" cy=\"20\" rx=\"12\" ry=\"6\" fill=\"currentColor\" opacity=\"0.15\" />\n      <path\n        d=\"M4 18 Q4 26 16 26 Q28 26 28 18\"\n        stroke=\"currentColor\"\n        strokeWidth=\"2.2\"\n        strokeLinecap=\"round\"\n        fill=\"none\"\n      />\n      <path d=\"M4 18 L1 14\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" />\n      <path d=\"M28 18 L31 14\" stroke=\"currentColor\" strokeWidth=\"2\" strokeLinecap=\"round\" />\n      <path\n        d=\"M11 15 Q10 11 12 9 Q13 7 11 5\"\n        stroke=\"currentColor\"\n        strokeWidth=\"1.6\"\n        strokeLinecap=\"round\"\n        fill=\"none\"\n        opacity=\"0.7\"\n      />\n      <path\n        d=\"M16 14 Q15 10 17 8 Q18 6 16 4\"\n        stroke=\"currentColor\"\n        strokeWidth=\"1.6\"\n        strokeLinecap=\"round\"\n        fill=\"none\"\n        opacity=\"0.9\"\n      />\n      <path\n        d=\"M21 15 Q20 11 22 9 Q23 7 21 5\"\n        stroke=\"currentColor\"\n        strokeWidth=\"1.6\"\n        strokeLinecap=\"round\"\n        fill=\"none\"\n        opacity=\"0.7\"\n      />\n    </svg>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+node_modules/
+.next/
+dist/
+build/
+out/
+coverage/
+*.lock
+pnpm-lock.yaml
+package-lock.json
+tsconfig.tsbuildinfo
+skills-lock.json
+*.min.js
+*.min.css
+.env*

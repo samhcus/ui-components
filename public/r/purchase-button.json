@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "purchase-button",
+  "type": "registry:ui",
+  "title": "Purchase Button",
+  "description": "A confident green call to action with a cart glyph and a springy press. Renders an anchor when a href is set, a button otherwise.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "motion",
+    "lucide-react"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/purchase-button.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/purchase-button.tsx",
+      "content": "\"use client\";\n\nimport * as React from \"react\";\nimport { motion, useReducedMotion } from \"motion/react\";\nimport { ShoppingCart } from \"lucide-react\";\nimport { cn } from \"@/lib/utils\";\n\nconst CLASSES =\n  \"inline-flex select-none items-center gap-2 rounded-lg border border-transparent bg-[#16A34A] px-4 py-2 text-sm font-medium text-white shadow-sm outline-none transition-colors duration-150 [@media(hover:hover)]:hover:bg-[#15803D] focus-visible:ring-2 focus-visible:ring-[#16A34A]/60 focus-visible:ring-offset-2 focus-visible:ring-offset-background\";\n\nconst SPRING = { type: \"spring\" as const, stiffness: 420, damping: 26, mass: 0.7 };\n\n/**\n * PurchaseButton — a confident green call to action with a cart glyph and a\n * springy press. Renders an anchor when `href` is set, a button otherwise, so\n * it drops into a product card or a plain form the same way.\n */\nexport function PurchaseButton({\n  label = \"Purchase\",\n  href,\n  target,\n  onClick,\n  className,\n}: {\n  /** Button text. */\n  label?: string;\n  /** When set, renders a link to this URL. */\n  href?: string;\n  /** Anchor target, e.g. \"_blank\". */\n  target?: string;\n  onClick?: () => void;\n  className?: string;\n}) {\n  const reduce = useReducedMotion();\n  const whileTap = reduce ? undefined : { scale: 0.97 };\n  const content = (\n    <>\n      <ShoppingCart size={15} strokeWidth={2.5} />\n      {label}\n    </>\n  );\n\n  if (href) {\n    return (\n      <motion.a\n        href={href}\n        target={target}\n        rel={target === \"_blank\" ? \"noopener noreferrer\" : undefined}\n        onClick={onClick}\n        whileTap={whileTap}\n        transition={SPRING}\n        className={cn(CLASSES, className)}\n      >\n        {content}\n      </motion.a>\n    );\n  }\n\n  return (\n    <motion.button\n      type=\"button\"\n      onClick={onClick}\n      whileTap={whileTap}\n      transition={SPRING}\n      className={cn(CLASSES, className)}\n    >\n      {content}\n    </motion.button>\n  );\n}\n\nexport default PurchaseButton;\n"
+    }
+  ]
+}

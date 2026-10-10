@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "weather-scene",
+  "type": "registry:ui",
+  "title": "Weather Scene",
+  "description": "A looping gif or image with the frosted-glass weather widget floating over it, as one joint component.",
+  "author": "Samuel (https://samhc.us)",
+  "dependencies": [
+    "motion",
+    "lucide-react"
+  ],
+  "registryDependencies": [
+    "https://ui.samhc.us/r/weather-stack.json"
+  ],
+  "files": [
+    {
+      "path": "registry/samuel/weather-scene.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/weather-scene.tsx",
+      "content": "\"use client\";\n\nimport { WeatherStack } from \"@/registry/samuel/weather-stack\";\nimport { cn } from \"@/lib/utils\";\n\n/**\n * WeatherScene — a looping background (gif or image) with the frosted-glass\n * WeatherStack floating over it as one joint component. A legibility scrim\n * grounds the glass over unpredictable footage. Pass your own `src`; anything\n * you drop in `children` composes on top of the scrim (captions, buttons, etc).\n */\nexport function WeatherScene({\n  src = \"/reading/reading.gif\",\n  alt = \"Ambient looping background\",\n  className,\n  children,\n}: {\n  /** Background media (gif/image) URL. */\n  src?: string;\n  alt?: string;\n  className?: string;\n  children?: React.ReactNode;\n}) {\n  return (\n    <div\n      className={cn(\n        \"relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border sm:aspect-[16/7]\",\n        className,\n      )}\n    >\n      {/* eslint-disable-next-line @next/next/no-img-element -- animated gif, no next/image optimization */}\n      <img src={src} alt={alt} loading=\"lazy\" decoding=\"async\" className=\"absolute inset-0 h-full w-full select-none object-cover\" />\n\n      {/* Legibility scrim — grounds the glass over unpredictable footage */}\n      <div className=\"pointer-events-none absolute inset-0 bg-gradient-to-t from-black/80 via-black/55 to-black/50\" />\n\n      {/* Frosted weather glass floats top-right; expanding it never reflows the scene */}\n      <div className=\"absolute right-5 top-5 z-20 flex flex-col items-end gap-2 text-right sm:right-6 sm:top-6\">\n        <WeatherStack />\n      </div>\n\n      {children}\n    </div>\n  );\n}\n"
+    }
+  ]
+}

@@ -1,0 +1,1335 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "samuel",
+  "homepage": "https://ui.samhc.us",
+  "items": [
+    {
+      "name": "pill-toggle",
+      "type": "registry:ui",
+      "title": "Pill Toggle",
+      "description": "A two-position rocker for light and dark mode. The active half sinks in with an inset shadow.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "next-themes",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/pill-toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pill-toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "typewriter",
+      "type": "registry:ui",
+      "title": "Typewriter",
+      "description": "Types and deletes strings in sequence, looping through an array. Configurable speed and cursor.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/typewriter.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/typewriter.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pulsating-button",
+      "type": "registry:ui",
+      "title": "Pulsating Button",
+      "description": "A button that emits an expanding ring. Pulse or ripple, any color. Ships its own keyframes.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/pulsating-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pulsating-button.tsx"
+        }
+      ],
+      "css": {
+        "@keyframes samuel-pulse": {
+          "0%, 100%": {
+            "box-shadow": "0 0 0 0 var(--pulse-color, var(--samuel-bg, currentColor))"
+          },
+          "50%": {
+            "box-shadow": "0 0 0 var(--distance, 8px) transparent"
+          }
+        },
+        "@keyframes samuel-pulse-ripple": {
+          "0%": {
+            "box-shadow": "0 0 0 0 var(--pulse-color, var(--samuel-bg, currentColor))"
+          },
+          "100%": {
+            "box-shadow": "0 0 0 var(--distance, 8px) transparent"
+          }
+        }
+      }
+    },
+    {
+      "name": "magnetic-button",
+      "type": "registry:ui",
+      "title": "Magnetic Button",
+      "description": "The wrapped element is pulled toward the cursor and springs back on leave. Respects reduced motion.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/magnetic-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/magnetic-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ship-toggle",
+      "type": "registry:ui",
+      "title": "Ship Toggle",
+      "description": "A tactile two-state switch (draft to shipped). The knob slides between halves with a spring.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/ship-toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ship-toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "css-box",
+      "type": "registry:ui",
+      "title": "CSS Box",
+      "description": "A draggable 3D cube in pure CSS perspective. Accepts any React node on each face.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/css-box.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/css-box.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dither-image",
+      "type": "registry:ui",
+      "title": "Dither Image",
+      "description": "Renders any image as a two-tone, Bayer-dithered stipple on a canvas. Ink on paper by default.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/dither-image.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dither-image.tsx"
+        }
+      ]
+    },
+    {
+      "name": "rage-button",
+      "type": "registry:ui",
+      "title": "Rage Button",
+      "description": "A button that snaps down on press and spits a burst of particles. Ship angry.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/rage-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/rage-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "social-buttons",
+      "type": "registry:ui",
+      "title": "Social Buttons",
+      "description": "A row of social links \u2014 monochrome at rest, each blooms into its real brand hue on hover (Instagram gets its authentic gradient). Inline brand glyphs, zero dependencies.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/social-buttons.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/social-buttons.tsx"
+        }
+      ]
+    },
+    {
+      "name": "memoji-widget",
+      "type": "registry:ui",
+      "title": "Memoji Widget",
+      "description": "A floating, draggable avatar that opens an introduction panel: a spinning 3D globe, reveal rows, profile cards, an intro video, and an email composer. Generic copy, pass your own name, avatar, and links. Pulls in the globe and tooltip from this registry.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "@phosphor-icons/react"
+      ],
+      "registryDependencies": [
+        "https://ui.samhc.us/r/globe-3d.json",
+        "https://ui.samhc.us/r/tooltip.json"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/memoji-widget.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/memoji-widget.tsx"
+        }
+      ]
+    },
+    {
+      "name": "wordmark-panel",
+      "type": "registry:ui",
+      "title": "Wordmark Panel",
+      "description": "A project-style panel titled with a colorful pixel wordmark. Drop any graphic in as the face. Pulls the pixel font via next/font.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/wordmark-panel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/wordmark-panel.tsx"
+        }
+      ]
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented Control",
+      "description": "An iOS pill thumb that spring-slides under the live segment, dividers dissolving as it passes.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/segmented-control.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/segmented-control.tsx"
+        }
+      ]
+    },
+    {
+      "name": "animated-counter",
+      "type": "registry:ui",
+      "title": "Animated Counter",
+      "description": "An odometer with real spring physics. Each digit rolls the short way and rests on crisp integers.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/animated-counter.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/animated-counter.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spotlight-card",
+      "type": "registry:ui",
+      "title": "Spotlight Card",
+      "description": "A card that catches the light: the border trails your cursor with real weight.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/spotlight-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/spotlight-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "shimmer-button",
+      "type": "registry:ui",
+      "title": "Shimmer Button",
+      "description": "A single light comet glides around the border while the face catches a glint on hover.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/shimmer-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/shimmer-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tilt-card",
+      "type": "registry:ui",
+      "title": "Tilt Card",
+      "description": "Leans toward your cursor in real 3D, catches a soft glare, and springs back flat when you leave.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/tilt-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tilt-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confetti-button",
+      "type": "registry:ui",
+      "title": "Confetti Button",
+      "description": "Click it anywhere and a physics confetti spray erupts from the exact pixel you hit. No library.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/confetti-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/confetti-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hue-slider",
+      "type": "registry:ui",
+      "title": "Hue Slider",
+      "description": "A range input whose track is the colour wheel, with a live swatch that glows in the picked hue.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [],
+      "files": [
+        {
+          "path": "registry/samuel/hue-slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/hue-slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "snap-back-card",
+      "type": "registry:ui",
+      "title": "Snap-back Card",
+      "description": "Wrap anything to drag it anywhere on the page, then spring it right back to where it started.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/snap-back-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/snap-back-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "wave-fill",
+      "type": "registry:ui",
+      "title": "Wave Fill",
+      "description": "Animated waving water that fills any container from the bottom, with two parallax crests.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/wave-fill.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/wave-fill.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bubble-field",
+      "type": "registry:ui",
+      "title": "Bubble Field",
+      "description": "A lightweight layer of bubbles that rise and wobble up through any container, then loop.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/bubble-field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/bubble-field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "aurora",
+      "type": "registry:ui",
+      "title": "Aurora",
+      "description": "Soft, slow-drifting ribbons of colour that glow behind content like the northern lights.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/aurora.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/aurora.tsx"
+        }
+      ]
+    },
+    {
+      "name": "weather-stack",
+      "type": "registry:ui",
+      "title": "Weather Stack",
+      "description": "A frosted-glass weather + local-time widget. Seattle is fixed; add any city with live geocoded search or your own location, each ticking on its own timezone.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/weather-stack.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/weather-stack.tsx"
+        }
+      ]
+    },
+    {
+      "name": "weather-scene",
+      "type": "registry:ui",
+      "title": "Weather Scene",
+      "description": "A looping gif or image with the frosted-glass weather widget floating over it, as one joint component.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "https://ui.samhc.us/r/weather-stack.json"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/weather-scene.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/weather-scene.tsx"
+        }
+      ]
+    },
+    {
+      "name": "purchase-button",
+      "type": "registry:ui",
+      "title": "Purchase Button",
+      "description": "A confident green call to action with a cart glyph and a springy press. Renders an anchor when a href is set, a button otherwise.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/purchase-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/purchase-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "coffee-button",
+      "type": "registry:ui",
+      "title": "Coffee Button",
+      "description": "A frosted-glass support button built to sit over imagery: white text on a translucent, blurred surface with a gentle press.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/coffee-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/coffee-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "read-more-button",
+      "type": "registry:ui",
+      "title": "Read More Button",
+      "description": "A small pill link whose trailing book icon is closed at rest and opens with a gentle upward lift on hover.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/read-more-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/read-more-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "book-cover",
+      "type": "registry:ui",
+      "title": "Book Cover",
+      "description": "A cover image that lifts and pops on hover, then morphs open into a detail dialog with title, author, blurb, and a purchase link. Self-contained morph, no dialog dependency.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/book-cover.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/book-cover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spinning-globe",
+      "type": "registry:ui",
+      "title": "Spinning Globe",
+      "description": "A clean line globe whose meridians scroll inside a circular clip, so it reads as rotating on its axis. Spins on hover or on a prop; stills under reduced motion.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/spinning-globe.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/spinning-globe.tsx"
+        }
+      ]
+    },
+    {
+      "name": "samuel-wordmark",
+      "type": "registry:ui",
+      "title": "Samuel Wordmark",
+      "description": "A name set in a single editorial serif italic, built to run large and centered as a masthead. Pulls the serif via next/font.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/samuel-wordmark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/samuel-wordmark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "writing-wordmark",
+      "type": "registry:ui",
+      "title": "Writing Wordmark",
+      "description": "A word in a warm handwriting signature, the informal counterpart to a serif masthead. Pulls the script face via next/font.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/writing-wordmark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/writing-wordmark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chopsticks-wordmark",
+      "type": "registry:ui",
+      "title": "Chopsticks Wordmark",
+      "description": "A rounded, friendly bot lockup: a light-blue Nunito name with a small badge alongside. Self-contained via next/font.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/chopsticks-wordmark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/chopsticks-wordmark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sandbox-wordmark",
+      "type": "registry:ui",
+      "title": "Sandbox Wordmark",
+      "description": "A chunky, glossy beach-toy wordmark: rounded Nunito, primary toy colors per letter, a gentle alternating tilt, and a drop shadow.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/sandbox-wordmark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sandbox-wordmark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "components-wordmark",
+      "type": "registry:ui",
+      "title": "Components Wordmark",
+      "description": "A clean product lockup: a small tracked eyebrow over a two-part name with an accent token. Relabel via props.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/components-wordmark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/components-wordmark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "just-for-fun-wordmark",
+      "type": "registry:ui",
+      "title": "Just For Fun Wordmark",
+      "description": "A friendly rounded lockup with an italic last word underlined by a hand-drawn squiggle that scales with the type. Self-contained via next/font.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/just-for-fun-wordmark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/just-for-fun-wordmark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pixel-wordmark",
+      "type": "registry:ui",
+      "title": "Pixel Wordmark",
+      "description": "A blocky arcade pixel wordmark where each letter is tinted from a cycling palette. Pulls the pixel font via next/font.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/pixel-wordmark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pixel-wordmark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "flags",
+      "type": "registry:ui",
+      "title": "Flags",
+      "description": "An overlapping stack of inline-SVG US, France, and Malaysia flags that fans out into an even row on group hover. Black border in light mode, white in dark.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/flags.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/flags.tsx"
+        }
+      ]
+    },
+    {
+      "name": "reveal",
+      "type": "registry:ui",
+      "title": "Reveal",
+      "description": "A scroll and mount triggered fade-up wrapper with a staggered index delay and reduced-motion support.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/reveal.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "free-tag",
+      "type": "registry:ui",
+      "title": "Free Tag",
+      "description": "A manila hang-tag on twine that tugs toward your cursor and snaps back with elastic rubber-band physics.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/free-tag.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/free-tag.tsx"
+        }
+      ]
+    },
+    {
+      "name": "site-cursor",
+      "type": "registry:ui",
+      "title": "Site Cursor",
+      "description": "A custom follower cursor: a dot that expands into a label when hovering interactive elements.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/site-cursor.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/site-cursor.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hand-write",
+      "type": "registry:ui",
+      "title": "Handwriting",
+      "description": "A ghost hand writes a phrase in white marker one letter at a time, arc-length timed for constant pen velocity, then a whiteboard eraser scrubs it away in serpentine passes. Frosted play, pause, and replay control.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/hand-write.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/hand-write.tsx"
+        }
+      ]
+    },
+    {
+      "name": "push-button",
+      "type": "registry:ui",
+      "title": "Push Button",
+      "description": "A tactile round push button. The face sits raised on a hard shadow and sinks flush on press, like a real physical key. Ships its own styles.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/push-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/push-button.tsx"
+        }
+      ],
+      "css": {
+        ".push-btn": {
+          "--btn-rgb": "24, 24, 27",
+          "--btn-shadow-rgb": "0, 0, 0",
+          "width": "44px",
+          "height": "44px",
+          "border": "none",
+          "cursor": "pointer",
+          "user-select": "none",
+          "touch-action": "manipulation",
+          "outline": "8px solid rgba(var(--btn-rgb), 0.18)",
+          "border-radius": "100%",
+          "position": "relative",
+          "transition": "outline 0.3s",
+          "flex-shrink": "0"
+        },
+        ".push-btn .push-btn-back": {
+          "background": "rgb(var(--btn-shadow-rgb))",
+          "border-radius": "100%",
+          "position": "absolute",
+          "inset": "0"
+        },
+        ".push-btn .push-btn-front": {
+          "background": "linear-gradient(0deg, rgba(var(--btn-rgb), 0.75) 20%, rgb(var(--btn-rgb)) 50%)",
+          "box-shadow": "0 0.5em 1em -0.2em rgba(var(--btn-shadow-rgb), 0.5)",
+          "border-radius": "100%",
+          "position": "absolute",
+          "border": "1px solid rgb(var(--btn-shadow-rgb))",
+          "inset": "0",
+          "display": "flex",
+          "justify-content": "center",
+          "align-items": "center",
+          "color": "#fff",
+          "transform": "translateY(-15%)",
+          "transition": "transform 0.15s ease-out, box-shadow 0.15s ease-out"
+        },
+        ".push-btn:active .push-btn-front": {
+          "transform": "translateY(0%)",
+          "box-shadow": "none"
+        },
+        ".push-btn:disabled": {
+          "cursor": "not-allowed",
+          "opacity": "0.6"
+        },
+        ".dark .push-btn": {
+          "--btn-rgb": "63, 63, 70",
+          "--btn-shadow-rgb": "0, 0, 0"
+        }
+      }
+    },
+    {
+      "name": "samuel-widget",
+      "type": "registry:ui",
+      "title": "Samuel Widget",
+      "description": "A draggable memoji that opens into a little messenger: profile, Seattle time and weather, a 3D globe, and an intro video.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "@phosphor-icons/react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/samuel-widget.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/samuel-widget.tsx"
+        }
+      ]
+    },
+    {
+      "name": "wok-logo",
+      "type": "registry:ui",
+      "title": "Wok Logo",
+      "description": "A minimal wok mark with rising steam lines that renders in the current text color.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/wok-logo.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/wok-logo.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cat-mark",
+      "type": "registry:ui",
+      "title": "Cat Mark",
+      "description": "A side-profile cat silhouette with ears, four legs, and a curling tail, filled in the current text color.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/cat-mark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/cat-mark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "samuel-ui-wordmark",
+      "type": "registry:ui",
+      "title": "UI Components Wordmark",
+      "description": "A cohesive Nunito lockup with a small blue UI chip, em-relative so it scales from panel title to page hero.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/samuel-ui-wordmark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/samuel-ui-wordmark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "design-wordmark",
+      "type": "registry:ui",
+      "title": "Design Wordmark",
+      "description": "The word Design in tight Inter with a thin rainbow prism bar that holographically drifts through the spectrum.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/design-wordmark.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/design-wordmark.tsx"
+        }
+      ],
+      "css": {
+        "@keyframes prism-shift": {
+          "to": {
+            "background-position": "200% 0"
+          }
+        }
+      }
+    },
+    {
+      "name": "video-player",
+      "type": "registry:ui",
+      "title": "Video Player",
+      "description": "Custom video chrome over a native player: click to play, a draggable scrubber, time, and volume.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "@phosphor-icons/react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/video-player.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/video-player.tsx"
+        }
+      ]
+    },
+    {
+      "name": "animated-theme-toggler",
+      "type": "registry:ui",
+      "title": "Animated Theme Toggler",
+      "description": "A theme switch that wipes the new theme in from the button with the View Transitions API.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "@phosphor-icons/react",
+        "react-dom"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/animated-theme-toggler.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/animated-theme-toggler.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cursor",
+      "type": "registry:ui",
+      "title": "Cursor",
+      "description": "A custom follower that trails the pointer. Attach it to any container.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/cursor.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/cursor.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-toolbar",
+      "type": "registry:component",
+      "title": "Dynamic Island Toolbar",
+      "description": "The original personal-site Toolbar, unchanged, with its actual supporting sources and integration guide. Next.js App Router required.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "next-themes",
+        "@phosphor-icons/react",
+        "@base-ui/react",
+        "sonner",
+        "lucide-react",
+        "clsx",
+        "tailwind-merge",
+        "tw-animate-css"
+      ],
+      "files": [
+        {
+          "path": "components/toolbar.tsx",
+          "type": "registry:file",
+          "target": "components/toolbar.tsx"
+        },
+        {
+          "path": "hooks/useScrollHost.ts",
+          "type": "registry:file",
+          "target": "hooks/useScrollHost.ts"
+        },
+        {
+          "path": "components/ui/animated-theme-toggler.tsx",
+          "type": "registry:file",
+          "target": "components/ui/animated-theme-toggler.tsx"
+        },
+        {
+          "path": "components/cat-cursor.tsx",
+          "type": "registry:file",
+          "target": "components/cat-cursor.tsx"
+        },
+        {
+          "path": "components/brand/cat-mark.tsx",
+          "type": "registry:file",
+          "target": "components/brand/cat-mark.tsx"
+        },
+        {
+          "path": "components/notification.tsx",
+          "type": "registry:file",
+          "target": "components/notification.tsx"
+        },
+        {
+          "path": "components/ui/tooltip.tsx",
+          "type": "registry:file",
+          "target": "components/ui/tooltip.tsx"
+        },
+        {
+          "path": "components/background-effects.tsx",
+          "type": "registry:file",
+          "target": "components/background-effects.tsx"
+        },
+        {
+          "path": "components/ui/sonner.tsx",
+          "type": "registry:file",
+          "target": "components/ui/sonner.tsx"
+        },
+        {
+          "path": "lib/ui-sound.ts",
+          "type": "registry:file",
+          "target": "lib/ui-sound.ts"
+        },
+        {
+          "path": "lib/utils.ts",
+          "type": "registry:file",
+          "target": "lib/utils.ts"
+        },
+        {
+          "path": "docs/components/dynamic-toolbar.md",
+          "type": "registry:file",
+          "target": "docs/dynamic-toolbar.md"
+        },
+        {
+          "path": "app/globals.css",
+          "type": "registry:file",
+          "target": "styles/dynamic-toolbar-original.css"
+        },
+        {
+          "path": "app/layout.tsx",
+          "type": "registry:file",
+          "target": "docs/dynamic-toolbar-original-layout.tsx"
+        },
+        {
+          "path": "components/ui/toolbar-panel.tsx",
+          "type": "registry:component",
+          "target": "components/ui/toolbar-panel.tsx"
+        },
+        {
+          "path": "hooks/useSiteSounds.ts",
+          "type": "registry:hook",
+          "target": "hooks/useSiteSounds.ts"
+        }
+      ]
+    },
+    {
+      "name": "morphing-dialog",
+      "type": "registry:ui",
+      "title": "Morphing Dialog",
+      "description": "A trigger that grows into a full dialog with a shared layout morph.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/morphing-dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/morphing-dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "background-effects",
+      "type": "registry:ui",
+      "title": "Background Effects",
+      "description": "A single canvas particle engine with eight ambient effects (snow, rain, embers, aurora, dither, stars, bubbles, mist). Theme-aware, reduced-motion safe, and parked to the document so effects scroll with the page.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/background-effects.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/background-effects.tsx"
+        }
+      ]
+    },
+    {
+      "name": "qp-dither",
+      "type": "registry:ui",
+      "title": "Qp Dither",
+      "description": "A Bayer 4x4 ordered dither of a blackletter logo mark. Every kept pixel becomes a dot that scatters on load and converges from the center out, breathes on its own phase, and eases away from the cursor.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/qp-dither.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/qp-dither.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cat-cursor",
+      "type": "registry:ui",
+      "title": "Cat Cursor",
+      "description": "A pixel cat that chases your cursor, sits when it catches up, and naps when idle. Ships with the oneko sprite.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/cat-cursor.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/cat-cursor.tsx"
+        }
+      ]
+    },
+    {
+      "name": "globe-3d",
+      "type": "registry:ui",
+      "title": "3D Globe",
+      "description": "A draggable WebGL earth with Apple Maps-style location pins and idle auto-rotation.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "three",
+        "@react-three/fiber",
+        "@react-three/drei"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/globe-3d.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/globe-3d.tsx"
+        }
+      ]
+    },
+    {
+      "name": "canvas-reveal-effect",
+      "type": "registry:ui",
+      "title": "Canvas Reveal Effect",
+      "description": "An animated dot-matrix reveal rendered with a WebGL fragment shader.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "three",
+        "@react-three/fiber"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/canvas-reveal-effect.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/canvas-reveal-effect.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "The workhorse button with six variants and five sizes.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "A text field with a focus ring and invalid states.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "A controlled range slider with a square thumb.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "A portalled Base UI tooltip with a canonical dark pill and a Tip one-liner wrapper.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toaster",
+      "type": "registry:ui",
+      "title": "Toaster",
+      "description": "A sonner toaster wired to the theme and popover tokens, with lucide status icons.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "sonner",
+        "next-themes",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/toaster.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toaster.tsx"
+        }
+      ]
+    },
+    {
+      "name": "web-haptics-demo",
+      "type": "registry:ui",
+      "title": "Web Haptics",
+      "description": "A synthesized UI sound pack, no audio files. Warm oscillator cues laddered by weight, with a playable grid and a live toggle, slider, and confirm.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/web-haptics-demo.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/web-haptics-demo.tsx"
+        },
+        {
+          "path": "registry/samuel/ui-sound.ts",
+          "type": "registry:lib",
+          "target": "lib/ui-sound.ts"
+        }
+      ]
+    },
+    {
+      "name": "agent-roster",
+      "type": "registry:ui",
+      "title": "Agent Roster",
+      "description": "A marquee row of pixel-art avatar faces riding a conveyor belt, with edge blur, play/pause, and a speed slider. Each face plays its GIF on hover.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "lucide-react"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/agent-roster.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/agent-roster.tsx"
+        }
+      ]
+    },
+    {
+      "name": "prose-kit",
+      "type": "registry:ui",
+      "title": "Prose Kit",
+      "description": "An inline rich-text toolkit: colored words, display-face words, hover tooltips, and vector media placeholders for post bodies.",
+      "author": "Samuel (https://samhc.us)",
+      "registryDependencies": [
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/prose-kit.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/prose-kit.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ig-gradient",
+      "type": "registry:ui",
+      "title": "Instagram Gradient",
+      "description": "A hidden SVG defs block exposing the authentic Instagram brand gradient as url(#ig-gradient), so any glyph or shape can fill with it.",
+      "author": "Samuel (https://samhc.us)",
+      "files": [
+        {
+          "path": "registry/samuel/ig-gradient.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/ig-gradient.tsx"
+        }
+      ]
+    },
+    {
+      "name": "reading-gif-panel",
+      "type": "registry:component",
+      "title": "Reading GIF Panel",
+      "description": "The original samhc.us reading panel, with all five social buttons, the train GIF, overlapping book covers, and morphing purchase dialogs. Original sources and assets preserved.",
+      "author": "Samuel (https://samhc.us)",
+      "dependencies": [
+        "motion",
+        "@phosphor-icons/react",
+        "@base-ui/react",
+        "lucide-react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
+        "tw-animate-css"
+      ],
+      "files": [
+        {
+          "path": "registry/samuel/reading-gif-panel.tsx",
+          "type": "registry:file",
+          "target": "components/reading-panel/reading-gif-panel.tsx"
+        },
+        {
+          "path": "components/reading-panel/social-dock.tsx",
+          "type": "registry:file",
+          "target": "components/reading-panel/social-dock.tsx"
+        },
+        {
+          "path": "components/reading-panel/reading-data.ts",
+          "type": "registry:file",
+          "target": "components/reading-panel/reading-data.ts"
+        },
+        {
+          "path": "components/reading-panel/social-dock.css",
+          "type": "registry:file",
+          "target": "components/reading-panel/social-dock.css"
+        },
+        {
+          "path": "registry/samuel/reading-panel/source/components/ui/button.tsx.txt",
+          "type": "registry:file",
+          "target": "components/ui/button.tsx"
+        },
+        {
+          "path": "registry/samuel/reading-panel/source/components/ui/tooltip.tsx.txt",
+          "type": "registry:file",
+          "target": "components/ui/tooltip.tsx"
+        },
+        {
+          "path": "registry/samuel/reading-panel/source/components/motion-primitives/morphing-dialog.tsx.txt",
+          "type": "registry:file",
+          "target": "components/motion-primitives/morphing-dialog.tsx"
+        },
+        {
+          "path": "registry/samuel/reading-panel/source/hooks/useClickOutside.tsx.txt",
+          "type": "registry:file",
+          "target": "hooks/useClickOutside.tsx"
+        },
+        {
+          "path": "registry/samuel/reading-panel/source/lib/utils.ts.txt",
+          "type": "registry:file",
+          "target": "lib/utils.ts"
+        },
+        {
+          "path": "docs/components/reading-gif-panel.md",
+          "type": "registry:file",
+          "target": "docs/reading-gif-panel.md"
+        },
+        {
+          "path": "registry/samuel/reading-panel/source/components/reading-section.tsx.txt",
+          "type": "registry:file",
+          "target": "docs/reading-section-original.txt"
+        },
+        {
+          "path": "registry/samuel/reading-panel/source/app/globals.css.txt",
+          "type": "registry:file",
+          "target": "styles/reading-panel-original.css"
+        },
+        {
+          "path": "registry/samuel/reading-panel/source/lib/socials.ts.txt",
+          "type": "registry:file",
+          "target": "lib/socials.ts"
+        }
+      ]
+    }
+  ]
+}
