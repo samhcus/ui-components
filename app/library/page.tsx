@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { ComponentsGallery } from "@/components/components/gallery";
 import { catalog } from "@/lib/components/catalog";
 
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title: "Samuel’s UI Library",
   description:

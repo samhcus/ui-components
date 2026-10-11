@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+
+export const revalidate = 0;
 export const metadata: Metadata = { title: "UX · Samuel’s UI Library", alternates: { canonical: "https://ui.samhc.us/notes" } };
 const notes = [
  { title: "Dynamic toolbar", slug: "dynamic-toolbar", paragraphs: ["The floating bar at the bottom of every page: one container that springs open, a font swap that cannot move a line, a colour engine that invents its own contrast. It is live at the bottom of the screen.", "The toolbar keeps drawing, colour, effects, and typography in one connected surface. Opening a tool closes the previous one. The container expands before its panel appears, then lets the panel settle before collapsing."], source: "components/toolbar.tsx" },
